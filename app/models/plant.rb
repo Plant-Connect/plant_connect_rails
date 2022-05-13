@@ -3,5 +3,5 @@ class Plant < ApplicationRecord
   validates :indoor, inclusion: { in: [true, false] }
   
   belongs_to :user
-
+  has_many :listings
 end
