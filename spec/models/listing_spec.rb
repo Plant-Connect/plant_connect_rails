@@ -8,5 +8,8 @@ RSpec.describe Listing, type: :model do
     it { should validate_numericality_of :quantity }
   end
 
- 
+  describe 'relationships' do 
+    it { should belong_to :user }
+    it { should belong_to :plant }
+  end
 end
