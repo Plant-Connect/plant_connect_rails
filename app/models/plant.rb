@@ -1,7 +1,7 @@
 class Plant < ApplicationRecord
   # Model Validations
   validates_presence_of :photo, 
-                        :type, 
+                        :plant_type, 
                         :description, 
                         :user_id
   
