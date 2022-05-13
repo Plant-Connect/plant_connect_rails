@@ -18,6 +18,13 @@ RSpec.describe User, type: :model do
       expect(user.password_digest).to_not eq('password123')
     end
 
+    it 'creates a user when email is unique and passwords match' do 
+      user = User.create(email: 'steven@test.com', password: 'password123', password_confirmation: 'password123')
+      
+      expect(user).to be_instance_of User
+      expect(User.last.email).to eq(user.email)
+    end
+    
     
   end
 end
