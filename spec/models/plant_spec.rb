@@ -5,6 +5,7 @@ RSpec.describe Plant, type: :model do
     it { should validate_presence_of :photo }
     it { should validate_presence_of :type }
     it { should validate_presence_of :description }
+    it { should validate_presence_of :user_id }
   end
 
   describe 'relationships' do 
