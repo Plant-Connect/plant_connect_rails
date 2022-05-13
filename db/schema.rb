@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_13_015453) do
+ActiveRecord::Schema.define(version: 2022_05_13_211435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "plants", force: :cascade do |t|
+    t.string "photo"
+    t.string "type"
+    t.text "description"
+    t.boolean "indoor"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_plants_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email"
@@ -23,4 +34,5 @@ ActiveRecord::Schema.define(version: 2022_05_13_015453) do
     t.string "username"
   end
 
+  add_foreign_key "plants", "users"
 end
