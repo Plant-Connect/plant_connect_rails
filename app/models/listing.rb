@@ -1,8 +1,13 @@
 class Listing < ApplicationRecord
-  validates_presence_of :quantity, :category
+  # Model Validations
+  validates_presence_of :quantity, 
+                        :category, 
+                        :user_id, 
+                        :plant_id
   validates_numericality_of :quantity
   validates :rooted, inclusion: { in: [true, false] }
-  
+
+  # Model Relationships
   belongs_to :user
   belongs_to :plant
 
