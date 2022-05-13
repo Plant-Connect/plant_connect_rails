@@ -1,0 +1,69 @@
+version: 2.1
+
+orbs:
+  ruby: circleci/ruby@1.4.0
+  heroku: circleci/heroku@1.2.6
+
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - checking
+      - test:
+          requires:
+            - build 
+  heroku_deploy:
+    jobs:
+      - build
+      - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
+          requires:
+            - build
+          filters:
+            branches:
+              only: main
+          post-steps:
+            - run: heroku run rake db:migrate -a plant-connect-be
+
+jobs:
+  build:
+    docker:
+      - image: cimg/ruby:2.7.4-node
+    steps:
+      - checkout
+      - ruby/install-deps
+  checking:
+    docker:
+      - image: cimg/ruby:2.7.4-node
+    steps:
+      - checkout
+      - ruby/install-deps
+  test:
+    docker:
+      - image: cimg/ruby:2.7.4-node
+      - environment:
+          POSTGRES_DB: plant_connect_test
+          POSTGRES_USER: plant_connect
+          POSTGRES_PASSWORD: ''
+        image: cimg/postgres:14.1
+    environment:
+      BUNDLE_JOBS: 3
+      BUNDLE_RETRY: 3
+      PGHOST: 127.0.0.1
+      PGUSER: plant_connect
+      PGPASSWORD: ''
+      RAILSENV: test
+    parallelism: 3
+    steps:
+      - checkout
+      - ruby/install-deps
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: |
+              bundle exec rails db:create RAILS_ENV=test
+              bundle exec rails db:migrate RAILS_ENV=test
+      - ruby/rspec-test:
+          label: RSpec tests
+          include: spec/**/*_spec.rb
