@@ -11,6 +11,11 @@ RSpec.describe User, type: :model do
     it { should have_secure_password }
   end
 
+  describe 'relationships' do 
+    it { should have_many :plants }
+    it { should have_many :listings }
+  end
+
   describe 'user creation' do 
     it 'encrypts password' do 
       user = User.create(username: 'Steven', email: 'steven@test.com', password: 'password123', password_confirmation: 'password123')
