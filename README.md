@@ -108,6 +108,7 @@
 - Database: PostgreSQL
 - Deployment: Heroku
 - Other tech used:
+  - Sidekiq
   - WebSockets 
   - Postman
   - RSpec 
