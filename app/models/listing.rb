@@ -3,6 +3,7 @@ class Listing < ApplicationRecord
   validates_presence_of :quantity, 
                         :category, 
                         :user_id, 
+                        :description, 
                         :plant_id
   validates_numericality_of :quantity
   validates :rooted, inclusion: { in: [true, false] }
