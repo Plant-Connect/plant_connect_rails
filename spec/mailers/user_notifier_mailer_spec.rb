@@ -4,10 +4,6 @@ RSpec.describe UserNotifierMailer, type: :mailer do
   describe 'send_listing_email' do
 
     before(:each) do 
-      Listing.destroy_all
-      Plant.destroy_all
-      User.destroy_all
-      
       @user1 = User.create!(
         username: 'Steven', 
         email: 'steven@test.com', 
