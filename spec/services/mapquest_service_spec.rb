@@ -11,6 +11,10 @@ RSpec.describe MapquestService, :vcr do
         expect(@location_data).to be_a Hash
       end
 
+      it 'hash has expected data' do 
+        expect(@location_data.keys).to eq([:lat, :lng])
+      end
+
       
     end 
   end
