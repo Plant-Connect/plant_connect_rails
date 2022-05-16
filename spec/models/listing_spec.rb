@@ -51,10 +51,11 @@ RSpec.describe Listing, type: :model do
         plant2 = Plant.create(photo: "plant_photo.jpg", plant_type: "pothos", indoor: true, user_id: user1.id)
         plant3 = Plant.create(photo: "plant_photo.jpg", plant_type: "philodendron", indoor: true, user_id: user2.id)
         listing1 = Listing.create(quantity: 1, category: 'plant', rooted: true, user_id: user1.id, plant_id: plant1.id, description: "A really nice plant", active: true)
-        listing2 = Listing.create(quantity: 1, category: 'plant', rooted: true, user_id: user2.id, plant_id: plant2.id, description: "A nice plant", active: true)
-        listing3 = Listing.create(quantity: 3, category: 'plant', rooted: true, user_id: user2.id, plant_id: plant3.id, description: "Some plants", active: true)
+        listing2 = Listing.create(quantity: 1, category: 'seeds', rooted: false, user_id: user2.id, plant_id: plant2.id, description: "A nice plant", active: true)
+        listing3 = Listing.create(quantity: 3, category: 'plant', rooted: true, user_id: user2.id, plant_id: plant3.id, description: "Seedies", active: true)
+        listing4 = Listing.create(quantity: 3, category: 'clippings', rooted: true, user_id: user2.id, plant_id: plant3.id, description: "cuttings", active: false)
         expect(Listing.active_listings_self_excluded(user1.id)).to eq([listing3, listing2])
-        expect(Listing.active_listings_self_excluded(user1.id)).to_not eq([listing1, listing2, listing3])
+        expect(Listing.active_listings_self_excluded(user1.id)).to_not eq([listing4,listing3,listing2,listing1])
       end
     end
   end
