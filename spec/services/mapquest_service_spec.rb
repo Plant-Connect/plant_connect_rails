@@ -15,7 +15,15 @@ RSpec.describe MapquestService, :vcr do
         expect(@location_data.keys).to eq([:lat, :lng])
       end
 
-      
-    end 
+      it 'latitude and longitude are returned as a Float' do 
+        expect(@location_data[:lat]).to be_a Float
+        expect(@location_data[:lat]).to eq(38.630276)
+        
+        expect(@location_data[:lng]).to be_a Float
+        expect(@location_data[:lng]).to eq(-90.200309)
+      end
+    end
+
+    
   end
 end
