@@ -8,5 +8,5 @@ class Plant < ApplicationRecord
   
   # Model Relationships
   belongs_to :user
-  has_many :listings
+  has_many :listings, dependent: :destroy
 end
