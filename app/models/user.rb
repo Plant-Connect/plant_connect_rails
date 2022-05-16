@@ -7,6 +7,6 @@ class User < ApplicationRecord
   has_secure_password
 
   # Model Relationships
-  has_many :plants
-  has_many :listings
+  has_many :plants, dependent: :destroy
+  has_many :listings, dependent: :destroy
 end
