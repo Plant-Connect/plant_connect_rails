@@ -1,20 +1,19 @@
 class ListingsController < ApplicationController
   def index 
-    Listing.destroy_all
-    Plant.destroy_all
-    User.destroy_all
     @user1 = User.create!(
         username: 'Steven', 
         email: 'steven@test.com', 
         password: 'password123', 
-        password_confirmation: 'password123'
+        password_confirmation: 'password123', 
+        location: 'Denver, CO'
       )
       
       @user2 = User.create!(
         username: 'Aedan', 
         email: 'aedan@test.com', 
         password: '123password', 
-        password_confirmation: '123password'
+        password_confirmation: '123password', 
+        location: 'Denver, CO'
       )
       
       @plant = @user1.plants.create(
