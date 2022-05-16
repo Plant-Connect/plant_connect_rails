@@ -45,6 +45,24 @@ RSpec.describe UserNotifierMailer, type: :mailer do
       expect(@mail.from).to eq(['no-reply@plantconnect.com'])
     end
 
-    
+    it 'renders the body' do
+      expect(@mail.text_part.body.to_s).to include('Hi Aedan,')
+      expect(@mail.text_part.body.to_s).to include('Check out the newest listing from Plant Connect!')
+      expect(@mail.text_part.body.to_s).to include('snake plant')
+      expect(@mail.text_part.body.to_s).to include('https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg')
+      expect(@mail.text_part.body.to_s).to include('This is the listings description')
+
+      expect(@mail.html_part.body.to_s).to include('Hi Aedan,')
+      expect(@mail.html_part.body.to_s).to include('Check out the newest listing from Plant Connect!')
+      expect(@mail.html_part.body.to_s).to include('snake plant')
+      expect(@mail.html_part.body.to_s).to include('https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg')
+      expect(@mail.html_part.body.to_s).to include('This is the listings description')
+
+      expect(@mail.body.encoded).to include('Hi Aedan,')
+      expect(@mail.body.encoded).to include('Check out the newest listing from Plant Connect!')
+      expect(@mail.body.encoded).to include('snake plant')
+      expect(@mail.body.encoded).to include('https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg')
+      expect(@mail.body.encoded).to include('This is the listings description')
+    end
   end
 end
