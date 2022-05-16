@@ -36,7 +36,7 @@ RSpec.describe UserNotifierMailer, type: :mailer do
         rooted: true
       )
       
-      @mail = UserNotifierMailer.send_listing_email(@user2, @listing)
+      @mail = UserNotifierMailer.send_listing_email(@user2.id, @listing.id)
     end
 
     it 'renders the headers' do
