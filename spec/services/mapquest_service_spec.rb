@@ -24,6 +24,16 @@ RSpec.describe MapquestService, :vcr do
       end
     end
 
-    
+    context '#directions(start, destination)' do
+      before(:each) do 
+        @route = MapquestService.directions('St. Louis, MO', 'Denver, CO')
+      end
+
+      it 'returns a hash of direction data' do 
+        expect(@route).to be_a Hash
+      end
+
+      
+    end 
   end
 end
