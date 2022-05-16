@@ -2,7 +2,8 @@ class User < ApplicationRecord
   # Model Validations
   validates_presence_of :email, 
                         :password_digest, 
-                        :username
+                        :username, 
+                        :location
   validates_uniqueness_of :email 
   has_secure_password
 
