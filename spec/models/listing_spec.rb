@@ -19,7 +19,7 @@ RSpec.describe Listing, type: :model do
 
   describe 'enumerable' do 
     it 'converts category from integer to related category' do 
-      user = User.create(username: 'Steven', email: 'steven@test.com', password: 'password123', password_confirmation: 'password123')
+      user = User.create(username: 'Steven', email: 'steven@test.com', password: 'password123', password_confirmation: 'password123', location: 'St. Louis, MO')
       plant = user.plants.create(photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', plant_type: 'snake plant', indoor: true)
 
       listing = user.listings.create!(plant_id: plant.id, quantity: 2, category: 1, description: 'This is the listings description', rooted: true)
@@ -29,7 +29,7 @@ RSpec.describe Listing, type: :model do
     end
     
     it 'allows category as a string as long as it matches one provided by enum' do 
-      user = User.create(username: 'Steven', email: 'steven@test.com', password: 'password123', password_confirmation: 'password123')
+      user = User.create(username: 'Steven', email: 'steven@test.com', password: 'password123', password_confirmation: 'password123', location: 'St. Louis, MO')
       plant = user.plants.create(photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', plant_type: 'snake plant', indoor: true)
   
       listing = user.listings.create!(plant_id: plant.id, quantity: 2, category: 'seeds', description: 'This is the listings description', rooted: true)
