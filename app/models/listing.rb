@@ -1,13 +1,15 @@
 class Listing < ApplicationRecord
   # Model Validations
-
-  validates_presence_of :quantity, 
-                        :category, 
-                        :description, 
-                        :user_id, 
+  before_validation :set_default_rooted
+  
+  validates_presence_of :quantity,
+                        :category,
+                        :description,
+                        :user_id,
                         :plant_id
+  
   validates_numericality_of :quantity
-  validates :rooted, inclusion: { in: [true, false] }
+  # validates :rooted, inclusion: { in: [true, false] }
   validates :active, inclusion: { in: [true, false] }
 
   # Model Relationships
@@ -24,10 +26,18 @@ class Listing < ApplicationRecord
   end
 
   def self.active_listings_self_excluded(user_id)
-    select("listings.*")
-    .where(listings: {active: true})
-    .where.not(listings: {user_id: user_id})
-    .group('listings.id')
+    where(active: true)
+    .where.not(user_id: user_id)
     .order('listings.created_at DESC')
   end
+
+    private
+  
+      def set_default_rooted
+        if self.category == "plant"
+          self.rooted = true
+        elsif self.category == "seeds"
+          self.rooted = false
+        end
+      end
 end
