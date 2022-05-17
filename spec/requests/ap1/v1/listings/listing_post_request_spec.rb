@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "Listing POST/Create", type: :request do
   describe "When a user sneds proper info in a form and attempts to post a new Listing," do
     it "sends a successful response if form was filled out properly" do
+
       user  = User.create(username: 'Aedan2', email: 'aedan2@test.com', password: '123password', password_confirmation: '123password', location: 'Denver, CO')
       plant = Plant.create(photo: "photo string", plant_type: "plant type string", user_id: user.id)
       listing_params = {
@@ -16,6 +17,8 @@ RSpec.describe "Listing POST/Create", type: :request do
       headers = { 'CONTENT_TYPE' => 'application/json' }
 
       post "/listings", headers: headers, params: listing_params
+
+      
     end
 
     it "sends back a json response with all necessary info" do
