@@ -225,6 +225,35 @@ describe 'Listings API' do
       end
     end
 
+    context 'INCOMPLETE params' do 
+      before(:each) do 
+        @user = User.create(username: 'Aedan', email: 'aedan@test.com', password: '123password', password_confirmation: '123password', location: 'Denver County, CO')
+        @plant = @user.plants.create(photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', plant_type: 'snake plant', indoor: true)
+        
+        @listing_params = {
+                            user_id: @user.id,
+                            plant_id: @plant.id,
+                            category: 2,
+                            description: 'This is the listings description'
+                          }.to_json
+
+        headers = { 'CONTENT_TYPE' => 'application/json' }
+
+        post "/api/v1/listings", headers: headers, params: @listing_params
+      end
+      
+      it 'returns a 400 error code' do 
+        expect(response.status).to eq(400)
+      end
     
+      it 'returns error message for invalid params' do 
+        json = JSON.parse(response.body, symbolize_names: true)
+    
+        expect(json).to be_a Hash
+        expect(json[:data]).to be_a Hash
+        expect(json[:data][:type]).to eq('error')
+        expect(json[:data][:message]).to eq("Invalid or incomplete paramaters provided")
+      end
+    end
   end
 end
