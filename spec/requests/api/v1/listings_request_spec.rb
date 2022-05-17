@@ -81,10 +81,6 @@ describe 'Listings API' do
         expect(json[:data]).to be_a Hash
         expect(json[:data][:message]).to eq(":user_id param missing or empty")
       end
-
-
-      
-    
     end
     
     context 'EMPTY params' do 
@@ -93,10 +89,21 @@ describe 'Listings API' do
         create_list(:user, 5)
         create_list(:plant, 10)
         create_list(:listing, 10)
-  
+        
         get '/api/v1/listings', params: { user_id: "" }
       end
-
+      
+      it 'returns a 400 error code' do 
+        expect(response.status).to eq(400)
+      end
+    
+      it 'returns error message for invalid params' do 
+        json = JSON.parse(response.body, symbolize_names: true)
+    
+        expect(json).to be_a Hash
+        expect(json[:data]).to be_a Hash
+        expect(json[:data][:message]).to eq(":user_id param missing or empty")
+      end
     end
   end
   
