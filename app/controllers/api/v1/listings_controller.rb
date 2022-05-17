@@ -18,7 +18,7 @@ class Api::V1::ListingsController < ApplicationController
     listing = Listing.create(listing_params)
 
     if listing.save
-      render json: ListingSerializer.create_listing(listing)
+      render json: ListingSerializer.show_listing(listing)
     else
       render json: ListingSerializer.listing_not_created, status: 400
     end
@@ -26,9 +26,11 @@ class Api::V1::ListingsController < ApplicationController
 
   def update
     listing = Listing.find(params[:listing_id])
-    
-
-    require "pry"; binding.pry
+    if listing.update(listing_params)
+      render json: ListingSerializer.show_listing(listing)
+    else
+      render json: ListingSerializer.no_update(listing), status: 400
+    end
   end
 
     private
