@@ -1,18 +1,44 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 
 User.destroy_all
+Plant.destroy_all
 
-@user1 = User.create(username: 'Aedan', email: 'aedan@test.com', password: '123password', password_confirmation: '123password', location: 'Denver, CO')
-@user2 = User.create(username: 'Brenda', email: 'brenda@test.com', password: 'password123', password_confirmation: 'password123', location: 'Denver, CO')
-@user3 = User.create(username: 'Emily', email: 'emily@test.com', password: 'plantconnect', password_confirmation: 'plantconnect', location: 'Denver, CO')
-@user4 = User.create(username: 'Jerry', email: 'jerry@test.com', password: 'madprops', password_confirmation: 'madprops', location: 'Denver, CO')
-@user5 = User.create(username: 'Katie', email: 'katie_a@test.com', password: 'seedly', password_confirmation: 'seedly', location: 'Seattle, WA')
-@user6 = User.create(username: 'Katie', email: 'katie_t@test.com', password: 'stemswap', password_confirmation: 'stemswap', location: 'Seattle, WA')
-@user7 = User.create(username: 'Paul', email: 'paul@test.com', password: 'plantydropper', password_confirmation: 'plantydropper', location: 'Chicago, IL')
-@user8 = User.create(username: 'Steven', email: 'steven@test.com', password: 'nogreenthumbs', password_confirmation: 'nogreenthumbs', location: 'Chicago, IL')
+user1 = User.create(username: 'Aedan', email: 'aedan@test.com', password: '123password', password_confirmation: '123password', location: 'Denver, CO')
+user2 = User.create(username: 'Brenda', email: 'brenda@test.com', password: 'password123', password_confirmation: 'password123', location: 'Denver, CO')
+user3 = User.create(username: 'Emily', email: 'emily@test.com', password: 'plantconnect', password_confirmation: 'plantconnect', location: 'Denver, CO')
+user4 = User.create(username: 'Jerry', email: 'jerry@test.com', password: 'madprops', password_confirmation: 'madprops', location: 'Denver, CO')
+user5 = User.create(username: 'Katie', email: 'katie_a@test.com', password: 'seedly', password_confirmation: 'seedly', location: 'Seattle, WA')
+user6 = User.create(username: 'Katie', email: 'katie_t@test.com', password: 'stemswap', password_confirmation: 'stemswap', location: 'Seattle, WA')
+user7 = User.create(username: 'Paul', email: 'paul@test.com', password: 'plantydropper', password_confirmation: 'plantydropper', location: 'Chicago, IL')
+user8 = User.create(username: 'Steven', email: 'steven@test.com', password: 'nogreenthumbs', password_confirmation: 'nogreenthumbs', location: 'Chicago, IL')
+
+plant1 = Plant.create(photo: "plant_photo.jpg", plant_type: "monsterra", indoor: true, user_id: user1.id)
+plant2 = Plant.create(photo: "plant_photo.jpg", plant_type: "pothos", indoor: true, user_id: user1.id)
+plant3 = Plant.create(photo: "plant_photo.jpg", plant_type: "philodendron", indoor: true, user_id: user2.id)
+plant4 = Plant.create(photo: "plant_photo.jpg", plant_type: "honeysuckle", indoor: false, user_id: user3.id)
+plant5 = Plant.create(photo: "plant_photo.jpg", plant_type: "mother of pearl", indoor: true, user_id: user3.id)
+plant6 = Plant.create(photo: "plant_photo.jpg", plant_type: "rosemary", indoor: false, user_id: user3.id)
+plant7 = Plant.create(photo: "plant_photo.jpg", plant_type: "salvia", indoor: false, user_id: user4.id)
+plant8 = Plant.create(photo: "plant_photo.jpg", plant_type: "snake plant", indoor: true, user_id: user5.id)
+plant9 = Plant.create(photo: "plant_photo.jpg", plant_type: "fiddle leaf fig", indoor: true, user_id: user5.id)
+plant10 = Plant.create(photo: "plant_photo.jpg", plant_type: "monsterra", indoor: true, user_id: user5.id)
+plant11 = Plant.create(photo: "plant_photo.jpg", plant_type: "geranium", indoor: false, user_id: user7.id)
+plant12 = Plant.create(photo: "plant_photo.jpg", plant_type: "giant bird of paradise", indoor: true, user_id: user8.id)
+plant13 = Plant.create(photo: "plant_photo.jpg", plant_type: "dragon tree", indoor: true, user_id: user8.id)
+plant14 = Plant.create(photo: "plant_photo.jpg", plant_type: "ponytail palm", indoor: true, user_id: user8.id)
+plant15 = Plant.create(photo: "plant_photo.jpg", plant_type: "aloe vera", indoor: false, user_id: user8.id)
+
+listing1 = Listing.create(quantity: 1, category: 'plant', rooted: true, user_id: user1.id, plant_id: plant1.id, description: "A really nice plant", active: true)
+listing2 = Listing.create(quantity: 1, category: 'plant', rooted: true, user_id: user1.id, plant_id: plant2.id, description: "A nice plant", active: true)
+listing3 = Listing.create(quantity: 3, category: 'plant', rooted: true, user_id: user2.id, plant_id: plant3.id, description: "Some plants", active: true)
+listing4 = Listing.create(quantity: 1, category: 'clippings', rooted: true, user_id: user3.id, plant_id: plant4.id, description: "Plant? No, it's a clipping", active: true)
+listing5 = Listing.create(quantity: 10, category: 'seeds', rooted: false, user_id: user4.id, plant_id: plant5.id, description: "Mother of Pearl seeds.", active: true)
+listing6 = Listing.create(quantity: 4, category: 'clippings', rooted: true, user_id: user5.id, plant_id: plant6.id, description: "Smell it, cook it, whatever.", active: true)
+listing7 = Listing.create(quantity: 1, category: 'plant', rooted: true, user_id: user5.id, plant_id: plant7.id, description: "Don't smoke it, seriously.", active: true)
+listing8 = Listing.create(quantity: 2, category: 'clippings', rooted: true, user_id: user5.id, plant_id: plant8.id, description: "Super sick clippings", active: false)
+listing9 = Listing.create(quantity: 3, category: 'plant', rooted: true, user_id: user6.id, plant_id: plant9.id, description: "Fiddle Leaf Fig, Yo", active: true)
+listing10 = Listing.create(quantity: 1, category: 'clippings', rooted: true, user_id: user6.id, plant_id: plant10.id, description: "Clippings, but you can't have them.", active: false)
+listing11 = Listing.create(quantity: 2, category: 'plant', rooted: true, user_id: user7.id, plant_id: plant11.id, description: "So stink, so beautiful. Geraniums", active: true)
+listing12 = Listing.create(quantity: 1, category: 'clippings', rooted: true, user_id: user7.id, plant_id: plant12.id, description: "Giant BoP clipping", active: true)
+listing13 = Listing.create(quantity: 5, category: 'seeds', rooted: false, user_id: user7.id, plant_id: plant13.id, description: "Literally just seeds", active: true)
+listing14 = Listing.create(quantity: 1, category: 'clippings', rooted: false, user_id: user8.id, plant_id: plant14.id, description: "Ponytail Palm clippings, hooray!", active: false)
+listing15 = Listing.create(quantity: 9, category: 'seeds', rooted: false, user_id: user8.id, plant_id: plant15.id, description: "Healing aloe vera seeds", active: true)
