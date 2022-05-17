@@ -12,9 +12,9 @@ class ListingSerializer
               "category": listing.category,
               "rooted": listing.rooted,
               "plant_id": listing.plant_id,
+              "user_id": listing.user_id,
               "description": listing.description,
               "plant": {
-                  "user_id": listing.plant.user_id,
                   "photo": listing.plant.photo,
                   "plant_type": listing.plant.plant_type,
                   "indoor": listing.plant.indoor
