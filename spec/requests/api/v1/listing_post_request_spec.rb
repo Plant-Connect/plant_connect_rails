@@ -23,9 +23,19 @@ RSpec.describe "Listing POST/Create", type: :request do
 
       json = JSON.parse(response.body, symbolize_names: true)
 
-      require "pry"; binding.pry
       expect(json).to be_a Hash
-
+      expect(json[:data]).to be_a Hash
+      expect(json[:data][:type]).to eq("listing")
+      expect(json[:data][:attributes]).to be_a Hash
+      expect(json[:data][:attributes][:listing_id]).to be_a Integer
+      expect(json[:data][:attributes][:active]).to eq(true)
+      expect(json[:data][:attributes][:quantity]).to be_a Integer
+      expect(json[:data][:attributes][:quantity]).to eq(20)
+      expect(json[:data][:attributes][:category]).to be_a String
+      expect(json[:data][:attributes][:category]).to eq("clippings")
+      expect(json[:data][:attributes][:rooted]).to eq(true)
+      expect(json[:data][:attributes][:plant_id]).to eq(plant.id)
+      expect(json[:data][:attributes][:user_id]).to eq(user.id)
     end
 
     it "sends back a json response with all necessary info" do

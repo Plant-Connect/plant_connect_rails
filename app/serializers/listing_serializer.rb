@@ -38,6 +38,7 @@ class ListingSerializer
           rooted: listing.rooted,
           plant_id: listing.plant_id,
           description: listing.description,
+          user_id: listing.user_id
         }
       }
     }.to_json
