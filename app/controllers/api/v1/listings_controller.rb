@@ -11,7 +11,6 @@ class Api::V1::ListingsController < ApplicationController
   end
 
   def create
-    require "pry"; binding.pry
     listing = Listing.create(listing_params)
     listing.save
     render json: ListingSerializer.create_listing(listing)
@@ -19,6 +18,6 @@ class Api::V1::ListingsController < ApplicationController
 
     private
       def listing_params
-        params.permit(:quantity, :category, :user_id, :description, :plant_id, )
+        params.permit(:quantity, :category, :user_id, :description, :plant_id, :active)
       end
 end
