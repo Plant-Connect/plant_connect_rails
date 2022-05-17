@@ -106,8 +106,11 @@ describe 'Listings API' do
       end
     end
   end
+
+
   
   context 'listings#create' do 
+    
     context 'happy path' do 
       before(:each) do 
         @user = User.create(username: 'Aedan', email: 'aedan@test.com', password: '123password', password_confirmation: '123password', location: 'Denver County, CO')
