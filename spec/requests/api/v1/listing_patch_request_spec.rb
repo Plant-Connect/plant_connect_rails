@@ -8,7 +8,7 @@ RSpec.describe "Listing Patch/Create", type: :request do
       listing = user.listings.create(quantity: 10, category: "plant", description: "blah blah", plant_id: plant.id)
 
       patch_params = {
-        quantity: 10,
+        quantity: 20,
         listing_id: listing.id
       }.to_json
 
@@ -27,6 +27,7 @@ RSpec.describe "Listing Patch/Create", type: :request do
         quantity: nil,
         listing_id: listing.id
       }.to_json
+
 
       headers = { 'CONTENT_TYPE' => 'application/json' }
 
