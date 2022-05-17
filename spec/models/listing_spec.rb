@@ -36,44 +36,25 @@ RSpec.describe Listing, type: :model do
       expect(Listing.last).to eq(listing)
       expect(listing.category).to eq('seeds')
     end
+  end 
 
-    it "the active attribute is set to true by default" do
+  describe 'listing creation' do 
+    it 'the active attribute is set to true by default' do
       user = User.create(username: 'Steven', email: 'steven@test.com', password: 'password123', password_confirmation: 'password123', location: 'St. Louis, MO')
       plant = user.plants.create(photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', plant_type: 'snake plant', indoor: true)
 
       listing = user.listings.create!(plant_id: plant.id, quantity: 2, category: 1, description: 'This is the listings description', rooted: true)
 
-      expect(listing).to eq(Listing.last)
-      expect(Listing.last.active).to eq(true)
+      expect(listing.active).to eq(true)
     end
-
-    it "if the category is plant, rooted equals true by default" do
+    
+    it 'the active attribute can be set to false' do 
       user = User.create(username: 'Steven', email: 'steven@test.com', password: 'password123', password_confirmation: 'password123', location: 'St. Louis, MO')
       plant = user.plants.create(photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', plant_type: 'snake plant', indoor: true)
-
-      listing = user.listings.create!(plant_id: plant.id, quantity: 2, category: 2, description: 'This is the listings description')
-
-      expect(listing.rooted).to eq(true)
-    end
-
-    it "if the category is seeds, rooted equals false by default" do
-      user = User.create(username: 'Steven', email: 'steven@test.com', password: 'password123', password_confirmation: 'password123', location: 'St. Louis, MO')
-      plant = user.plants.create(photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', plant_type: 'snake seed', indoor: true)
-
-      listing = user.listings.create!(plant_id: plant.id, quantity: 2, category: 0, description: 'This is the listings description')
-
-      expect(listing.rooted).to eq(false)
-    end
-
-    it "if category is clippings, no default for rooted" do
-      user = User.create(username: 'Steven', email: 'steven@test.com', password: 'password123', password_confirmation: 'password123', location: 'St. Louis, MO')
-      plant = user.plants.create(photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', plant_type: 'snake seed', indoor: true)
-
-      listing1 = user.listings.create!(plant_id: plant.id, quantity: 2, category: 1, description: 'This is the listings description', rooted: true)
-      listing2 = user.listings.create!(plant_id: plant.id, quantity: 2, category: 1, description: 'This is the listings description', rooted: false)
-
-      expect(listing1.rooted).to eq(true)
-      expect(listing2.rooted).to eq(false)
+  
+      listing = user.listings.create!(plant_id: plant.id, quantity: 2, category: 1, description: 'This is the listings description', rooted: true, active: false)
+  
+      expect(listing.active).to eq(false)
     end
   end
 
@@ -98,9 +79,6 @@ RSpec.describe Listing, type: :model do
   describe 'class methods' do
     describe '#active_listings_self_excluded' do
       it 'returns all active listings, excluding listings a user has posted' do
-        User.destroy_all
-        Plant.destroy_all
-        Listing.destroy_all
         user1 = User.create(username: 'Katie', email: 'katie_a@test.com', password: '123password', password_confirmation: '123password', location: 'Denver, CO')
         user2 = User.create(username: 'Brenda', email: 'brenda@test.com', password: 'password123', password_confirmation: 'password123', location: 'Denver, CO')
         plant1 = Plant.create(photo: "plant_photo.jpg", plant_type: "monsterra", indoor: true, user_id: user1.id)
@@ -110,9 +88,44 @@ RSpec.describe Listing, type: :model do
         listing2 = Listing.create(quantity: 1, category: 'seeds', rooted: false, user_id: user2.id, plant_id: plant2.id, description: "A nice plant")
         listing3 = Listing.create(quantity: 3, category: 'plant', rooted: true, user_id: user2.id, plant_id: plant3.id, description: "Seedies")
         listing4 = Listing.create(quantity: 3, category: 'clippings', rooted: true, user_id: user2.id, plant_id: plant3.id, description: "cuttings", active: false)
+
         expect(Listing.active_listings_self_excluded(user1.id)).to eq([listing3, listing2])
         expect(Listing.active_listings_self_excluded(user1.id)).to_not eq([listing4,listing3,listing2,listing1])
       end
+    end
+  end
+
+  describe 'private methods' do 
+    describe 'set_default_rooted' do 
+      it 'if the category is plant, rooted equals true by default' do
+        user = User.create(username: 'Steven', email: 'steven@test.com', password: 'password123', password_confirmation: 'password123', location: 'St. Louis, MO')
+        plant = user.plants.create(photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', plant_type: 'snake plant', indoor: true)
+
+        listing = user.listings.create!(plant_id: plant.id, quantity: 2, category: 2, description: 'This is the listings description')
+
+        expect(listing.rooted).to eq(true)
+      end
+
+      it 'if the category is seeds, rooted equals false by default' do
+        user = User.create(username: 'Steven', email: 'steven@test.com', password: 'password123', password_confirmation: 'password123', location: 'St. Louis, MO')
+        plant = user.plants.create(photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', plant_type: 'snake seed', indoor: true)
+
+        listing = user.listings.create!(plant_id: plant.id, quantity: 2, category: 0, description: 'This is the listings description')
+
+        expect(listing.rooted).to eq(false)
+      end
+
+      it 'if category is clippings, no default for rooted and must be set in creation' do
+        user = User.create(username: 'Steven', email: 'steven@test.com', password: 'password123', password_confirmation: 'password123', location: 'St. Louis, MO')
+        plant = user.plants.create(photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', plant_type: 'snake seed', indoor: true)
+
+        listing1 = user.listings.create!(plant_id: plant.id, quantity: 2, category: 1, description: 'This is the listings description', rooted: true)
+        listing2 = user.listings.create!(plant_id: plant.id, quantity: 2, category: 1, description: 'This is the listings description', rooted: false)
+
+        expect(listing1.rooted).to eq(true)
+        expect(listing2.rooted).to eq(false)
+      end
+
     end
   end
 end
