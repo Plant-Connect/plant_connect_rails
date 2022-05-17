@@ -41,7 +41,7 @@ RSpec.describe "Listing POST/Create", type: :request do
       user  = User.create(username: 'Aedan2', email: 'aedan2@test.com', password: '123password', password_confirmation: '123password', location: 'Denver, CO')
       plant = user.plants.create(photo: 'photo string', plant_type: 'plant_type', indoor: true)
       listing_params = {
-        quantity: 20,
+        quantity: true,
         category: :clippings,
         user_id: user.id,
         plant_id: plant.id
