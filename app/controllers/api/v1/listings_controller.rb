@@ -11,6 +11,7 @@ class Api::V1::ListingsController < ApplicationController
   end
 
   def create
+    require "pry"; binding.pry
     listing = Listing.create(listing_params)
     listing.save
     render json: ListingSerializer.create_listing(listing)
