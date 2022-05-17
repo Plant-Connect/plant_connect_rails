@@ -9,6 +9,7 @@ RSpec.describe "Listing POST/Create", type: :request do
       listing_params = {
         quantity: 20,
         category: :clippings,
+        rooted: false,
         user_id: user.id,
         description: "this is a plant clipping please have it for free",
         plant_id: plant.id
@@ -18,6 +19,9 @@ RSpec.describe "Listing POST/Create", type: :request do
 
       post "/api/v1/listings", headers: headers, params: listing_params
 
+      expect(response.status).to eq(204)
+
+      json = JSON.parse(response.body, symbolize_names: true)
 
     end
 
