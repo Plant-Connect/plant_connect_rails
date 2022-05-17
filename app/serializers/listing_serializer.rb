@@ -43,4 +43,16 @@ class ListingSerializer
       }
     }.to_json
   end
+
+  def self.listing_not_created
+    {
+      data: {
+        id: nil,
+        type: "listing",
+        attributes: {
+          description: "Form not filled out all the way, Please try again"
+        }
+      }
+    }
+  end
 end
