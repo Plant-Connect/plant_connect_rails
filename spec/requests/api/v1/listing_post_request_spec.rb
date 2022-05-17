@@ -16,9 +16,9 @@ RSpec.describe "Listing POST/Create", type: :request do
 
       headers = { 'CONTENT_TYPE' => 'application/json' }
 
-      post "/listings", headers: headers, params: listing_params
+      post "/api/v1/listings", headers: headers, params: listing_params
 
-      
+
     end
 
     it "sends back a json response with all necessary info" do
