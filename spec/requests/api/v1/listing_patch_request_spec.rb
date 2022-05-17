@@ -56,6 +56,16 @@ RSpec.describe "Listing Patch/Create", type: :request do
 
       json = JSON.parse(response.body, symbolize_names: true)
 
+      expect(json).to be_a Hash
+      expect(json[:data]).to be_a Hash
+      expect(json[:data][:id]).to eq(nil)
+      expect(json[:data][:type]).to be_a String
+      expect(json[:data][:type]).to eq("listing")
+      expect(json[:data][:attributes]).to be_a Hash
+      expect(json[:data][:attributes][:description]).to be_a String
+      expect(json[:data][:attributes][:description]).to eq("Form filled out incorrectly, Listing was not updated")
+      expect(json[:data][:attributes][:listing_id]).to be_a Integer
+      expect(json[:data][:attributes][:listing_id]).to eq(listing.id)
     end
   end
 end
