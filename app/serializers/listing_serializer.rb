@@ -25,7 +25,7 @@ class ListingSerializer
   }
   end
 
-  def self.create_listing(listing)
+  def self.show_listing(listing)
     {
       data: {
         id: nil,
@@ -51,6 +51,19 @@ class ListingSerializer
         type: "listing",
         attributes: {
           description: "Form not filled out all the way, Please try again"
+        }
+      }
+    }
+  end
+
+  def self.no_update(listing)
+    {
+      data: {
+        id: nil,
+        type: "listing",
+        attributes: {
+          description: "Form filled out incorrectly, Listing was not updated",
+          listing_id: listing.id
         }
       }
     }
