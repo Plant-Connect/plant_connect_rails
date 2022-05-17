@@ -16,6 +16,6 @@ class Api::V1::ListingsController < ApplicationController
 
 private 
   def missing_params
-    render json: { data: { message: ':user_id param missing or empty' } }, status: 401
+    render json: { data: { message: ':user_id param missing or empty' } }, status: 400
   end 
 end
