@@ -18,6 +18,6 @@ class Api::V1::ListingsController < ApplicationController
 
     private
       def listing_params
-        params.permit(:quantity, :category, :user_id, :description, :plant_id, :active)
+        params.permit(:quantity, :category, :user_id, :description, :plant_id, :active, :rooted)
       end
 end
