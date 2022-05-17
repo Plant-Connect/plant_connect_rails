@@ -1,16 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe "Listing POST/Create", type: :request do
-  describe "When a user sneds proper info in a form and attempts to post a new Listing," do
+  describe "When a user sends proper info in a form and attempts to post a new Listing," do
     it "sends a successful response if form was filled out properly" do
 
       user  = User.create(username: 'Aedan2', email: 'aedan2@test.com', password: '123password', password_confirmation: '123password', location: 'Denver, CO')
-      plant = Plant.create(photo: "photo string", plant_type: "plant type string", user_id: user.id)
+      plant = user.plants.create(photo: 'photo string', plant_type: 'plant_type', indoor: true)
       listing_params = {
         quantity: 20,
         category: :clippings,
-        rooted: false,
         user_id: user.id,
+        rooted: true,
         description: "this is a plant clipping please have it for free",
         plant_id: plant.id
                        }.to_json
@@ -22,7 +22,9 @@ RSpec.describe "Listing POST/Create", type: :request do
       expect(response.status).to eq(200)
 
       json = JSON.parse(response.body, symbolize_names: true)
+
       require "pry"; binding.pry
+      expect(json).to be_a Hash
 
     end
 

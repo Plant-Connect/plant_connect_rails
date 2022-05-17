@@ -1,9 +1,9 @@
 class Listing < ApplicationRecord
   # Model Validations
-  validates_presence_of :quantity, 
-                        :category, 
-                        :user_id, 
-                        :description, 
+  validates_presence_of :quantity,
+                        :category,
+                        :user_id,
+                        :description,
                         :plant_id
   validates_numericality_of :quantity
   validates :rooted, inclusion: { in: [true, false] }
@@ -21,4 +21,8 @@ class Listing < ApplicationRecord
     .group('listings.id')
     .order('listings.created_at DESC')
   end
+
+  # def active
+  #   true
+  # end
 end

@@ -32,7 +32,7 @@ class ListingSerializer
         type: "listing",
         attributes: {
           listing_id: listing.id,
-          active: listing.active,
+          active: true,
           quantity: listing.quantity,
           category: listing.category,
           rooted: listing.rooted,
