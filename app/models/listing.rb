@@ -21,4 +21,12 @@ class Listing < ApplicationRecord
       ListingSenderJob.perform_async(recipient.id, self.id)
     end
   end
+
+  def self.active_listings_self_excluded(user_id)
+    select("listings.*")
+    .where(listings: {active: true})
+    .where.not(listings: {user_id: user_id})
+    .group('listings.id')
+    .order('listings.created_at DESC')
+  end
 end
