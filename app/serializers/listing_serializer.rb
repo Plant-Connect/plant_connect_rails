@@ -4,7 +4,7 @@ class ListingSerializer
       "data": {
           "id": nil,
           "type": "listings",
-          "attributes": listings.map do |listing| 
+          "attributes": listings.map do |listing|
             {
               "listing_id": listing.id,
               "active": listing.active,
@@ -24,4 +24,35 @@ class ListingSerializer
       }
   }
   end
-end 
+
+  def self.create_listing(listing)
+    {
+      data: {
+        id: nil,
+        type: "listing",
+        attributes: {
+          listing_id: listing.id,
+          active: true,
+          quantity: listing.quantity,
+          category: listing.category,
+          rooted: listing.rooted,
+          plant_id: listing.plant_id,
+          description: listing.description,
+          user_id: listing.user_id
+        }
+      }
+    }.to_json
+  end
+
+  def self.listing_not_created
+    {
+      data: {
+        id: nil,
+        type: "listing",
+        attributes: {
+          description: "Form not filled out all the way, Please try again"
+        }
+      }
+    }
+  end
+end

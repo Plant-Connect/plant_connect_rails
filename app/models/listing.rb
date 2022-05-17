@@ -1,11 +1,13 @@
 class Listing < ApplicationRecord
   # Model Validations
   before_validation :set_default_rooted
+  
   validates_presence_of :quantity,
                         :category,
                         :description,
                         :user_id,
                         :plant_id
+  
   validates_numericality_of :quantity
   # validates :rooted, inclusion: { in: [true, false] }
   validates :active, inclusion: { in: [true, false] }
@@ -30,7 +32,7 @@ class Listing < ApplicationRecord
   end
 
     private
-
+  
       def set_default_rooted
         if self.category == "plant"
           self.rooted = true

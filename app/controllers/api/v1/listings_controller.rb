@@ -4,18 +4,28 @@ class Api::V1::ListingsController < ApplicationController
   # This method will need the ID of the objects to be passed as the `perform` function does NOT pass through objects and will convert any argument into a serialize-able string. 
   # <listing_object>.send_new_listing_email(@listing)
 
-  def index 
+  def index
     # return all active listings (excluding users own listings)
     if params[:user_id].present?
-    listings = Listing.active_listings_self_excluded(params[:user_id])
-    render json: ListingSerializer.listings(listings, params[:user_id])
+      listings = Listing.active_listings_self_excluded(params[:user_id])
+      render json: ListingSerializer.listings(listings, params[:user_id])
     else
-      missing_params
+      render json: { data: { message: ':user_id param missing or empty' } }, status: 400
     end 
   end
 
-private 
-  def missing_params
-    render json: { data: { message: ':user_id param missing or empty' } }, status: 400
-  end 
+  def create
+    listing = Listing.create(listing_params)
+    
+    if listing.save
+      render json: ListingSerializer.create_listing(listing)
+    else
+      render json: ListingSerializer.listing_not_created, status: 400
+    end
+  end
+
+    private
+      def listing_params
+        params.permit(:quantity, :category, :user_id, :description, :plant_id, :active, :rooted)
+      end
 end
