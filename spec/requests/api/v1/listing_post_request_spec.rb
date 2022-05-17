@@ -19,9 +19,10 @@ RSpec.describe "Listing POST/Create", type: :request do
 
       post "/api/v1/listings", headers: headers, params: listing_params
 
-      expect(response.status).to eq(204)
+      expect(response.status).to eq(200)
 
       json = JSON.parse(response.body, symbolize_names: true)
+      require "pry"; binding.pry
 
     end
 

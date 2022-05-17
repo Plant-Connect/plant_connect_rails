@@ -25,7 +25,7 @@ class ListingSerializer
   }
   end
 
-  def create_listing(listing)
+  def self.create_listing(listing)
     {
       data: {
         id: nil,
