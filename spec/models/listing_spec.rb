@@ -46,6 +46,35 @@ RSpec.describe Listing, type: :model do
       expect(listing).to eq(Listing.last)
       expect(Listing.last.active).to eq(true)
     end
+
+    it "if the category is plant, rooted equals true by default" do
+      user = User.create(username: 'Steven', email: 'steven@test.com', password: 'password123', password_confirmation: 'password123', location: 'St. Louis, MO')
+      plant = user.plants.create(photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', plant_type: 'snake plant', indoor: true)
+
+      listing = user.listings.create!(plant_id: plant.id, quantity: 2, category: 2, description: 'This is the listings description')
+
+      expect(listing.rooted).to eq(true)
+    end
+
+    it "if the category is seeds, rooted equals false by default" do
+      user = User.create(username: 'Steven', email: 'steven@test.com', password: 'password123', password_confirmation: 'password123', location: 'St. Louis, MO')
+      plant = user.plants.create(photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', plant_type: 'snake seed', indoor: true)
+
+      listing = user.listings.create!(plant_id: plant.id, quantity: 2, category: 0, description: 'This is the listings description')
+
+      expect(listing.rooted).to eq(false)
+    end
+
+    it "if category is clippings, no default for rooted" do
+      user = User.create(username: 'Steven', email: 'steven@test.com', password: 'password123', password_confirmation: 'password123', location: 'St. Louis, MO')
+      plant = user.plants.create(photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', plant_type: 'snake seed', indoor: true)
+
+      listing1 = user.listings.create!(plant_id: plant.id, quantity: 2, category: 1, description: 'This is the listings description', rooted: true)
+      listing2 = user.listings.create!(plant_id: plant.id, quantity: 2, category: 1, description: 'This is the listings description', rooted: false)
+
+      expect(listing1.rooted).to eq(true)
+      expect(listing2.rooted).to eq(false)
+    end
   end
 
   describe 'instance methods' do
