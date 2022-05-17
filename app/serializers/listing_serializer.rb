@@ -4,7 +4,7 @@ class ListingSerializer
       "data": {
           "id": nil,
           "type": "listings",
-          "attributes": listings.map do |listing| 
+          "attributes": listings.map do |listing|
             {
               "listing_id": listing.id,
               "active": listing.active,
@@ -24,4 +24,22 @@ class ListingSerializer
       }
   }
   end
-end 
+
+  def create_listing(listing)
+    {
+      data: {
+        id: nil,
+        type: "listing",
+        attributes: {
+          listing_id: listing.id,
+          active: listing.active,
+          quantity: listing.quantity,
+          category: listing.category,
+          rooted: listing.rooted,
+          plant_id: listing.plant_id,
+          description: listing.description,
+        }
+      }
+    }.to_json
+  end
+end
