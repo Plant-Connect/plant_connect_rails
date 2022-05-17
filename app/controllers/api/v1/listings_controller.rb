@@ -6,5 +6,7 @@ class Api::V1::ListingsController < ApplicationController
 
   def index 
     # return all active listings (excluding users own listings)
+    listings = Listing.active_listings_self_excluded(params[:user_id])
+    render json: ListingSerializer.listings(listings,params[:user_id])
   end
 end
