@@ -33,6 +33,20 @@ describe "get /listings API endpoint" do
       expect(listing[:plant][:plant_type]).to be_a String
       expect(listing[:plant][:indoor].class).to_not eq(String)
       # expect(listing[:plant][:indoor].class).to eq(TrueClass || FalseClass)
-    end 
+    end
   end
+
+  it "returns a useful error message if user_id params are not provided" do 
+    create_list(:user, 5)
+    create_list(:plant, 10)
+    create_list(:listing, 10)
+    headers = { 'CONTENT_TYPE' => 'application/json', "Accept" => 'application/json' }
+    get '/api/v1/listings', headers: headers
+
+    expect(response.status).to eq(401)
+    json = JSON.parse(response.body, symbolize_names: true)
+    expect(json).to be_a Hash
+    expect(json[:data]).to be_a Hash
+    expect(json[:data][:message]).to eq(":user_id param missing or empty")
+  end 
 end 
