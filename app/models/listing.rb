@@ -1,5 +1,6 @@
 class Listing < ApplicationRecord
   # Model Validations
+
   validates_presence_of :quantity, 
                         :category, 
                         :description, 
