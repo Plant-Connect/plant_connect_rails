@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Listing POST/Create", type: :request do
   describe "When a user sends proper info in a form and attempts to post a new Listing," do
-    it "sends a successful response if form was filled out properly" do
+    it "sends a successful response if form was filled out properly, and has all proper info in a json object" do
 
       user  = User.create(username: 'Aedan2', email: 'aedan2@test.com', password: '123password', password_confirmation: '123password', location: 'Denver, CO')
       plant = user.plants.create(photo: 'photo string', plant_type: 'plant_type', indoor: true)
@@ -36,10 +36,6 @@ RSpec.describe "Listing POST/Create", type: :request do
       expect(json[:data][:attributes][:rooted]).to eq(true)
       expect(json[:data][:attributes][:plant_id]).to eq(plant.id)
       expect(json[:data][:attributes][:user_id]).to eq(user.id)
-    end
-
-    it "sends back a json response with all necessary info" do
-
     end
 
     it "sends an unsuccesful response if form filled out improperly, or incomplete" do
