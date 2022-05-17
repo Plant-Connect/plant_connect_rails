@@ -48,10 +48,8 @@ class ListingSerializer
     {
       data: {
         id: nil,
-        type: "listing",
-        attributes: {
-          description: "Form not filled out all the way, Please try again"
-        }
+        type: "error",
+        message: "Invalid or incomplete paramaters provided"
       }
     }
   end
