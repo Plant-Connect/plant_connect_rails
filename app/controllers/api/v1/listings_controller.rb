@@ -12,8 +12,11 @@ class Api::V1::ListingsController < ApplicationController
 
   def create
     listing = Listing.create(listing_params)
-    listing.save
-    render json: ListingSerializer.create_listing(listing)
+    if listing.save
+      render json: ListingSerializer.create_listing(listing)
+    else
+      render json: ListingSerializer.listing_not_created, status: 400
+    end
   end
 
     private
