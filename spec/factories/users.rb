@@ -3,6 +3,7 @@ FactoryBot.define do
     email { Faker::Internet.email }
     username { Faker::FunnyName.name }
     location { Faker::Address.city }
-    password_digest {Faker::Alphanumeric.alphanumeric(number: 10)}
+    password { "password"}
+    password_confirmation { "password"}
   end
 end

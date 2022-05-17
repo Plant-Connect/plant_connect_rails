@@ -31,7 +31,8 @@ RSpec.describe UserNotifierMailer, type: :mailer do
         quantity: 2, 
         category: 1, 
         description: 'This is the listings description', 
-        rooted: true
+        rooted: true, 
+        active: true
       )
       
       @mail = UserNotifierMailer.send_listing_email(@user2.id, @listing.id)
