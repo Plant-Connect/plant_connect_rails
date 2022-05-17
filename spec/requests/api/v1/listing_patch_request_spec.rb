@@ -10,7 +10,7 @@ RSpec.describe "Listing Patch/Create", type: :request do
       patch_params = {
         quantity: 10,
         listing_id: listing.id
-      }
+      }.to_json
 
       headers = { 'CONTENT_TYPE' => 'application/json' }
 
