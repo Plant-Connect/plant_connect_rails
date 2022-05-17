@@ -28,18 +28,21 @@ jobs:
   build:
     docker:
       - image: cimg/ruby:2.7.4-node
+      - image: cimg/redis:6.2.6
     steps:
       - checkout
       - ruby/install-deps
   checking:
     docker:
       - image: cimg/ruby:2.7.4-node
+      - image: cimg/redis:6.2.6
     steps:
       - checkout
       - ruby/install-deps
   test:
     docker:
       - image: cimg/ruby:2.7.4-node
+      - image: cimg/redis:6.2.6
       - environment:
           POSTGRES_DB: plant_connect_test
           POSTGRES_USER: plant_connect
