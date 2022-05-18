@@ -18,7 +18,7 @@ class Api::V1::ListingsController < ApplicationController
     listing = Listing.create(listing_params)
 
     if listing.save
-      render json: ListingSerializer.show_listing(listing)
+      render json: ListingSerializer.show_listing(listing), status: 201
     else
       render json: ListingSerializer.listing_not_created, status: 400
     end
