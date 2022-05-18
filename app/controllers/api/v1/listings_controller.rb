@@ -27,7 +27,7 @@ class Api::V1::ListingsController < ApplicationController
   def update
     listing = Listing.find(params[:listing_id])
     if listing.update(listing_params)
-      render json: ListingSerializer.show_listing(listing)
+      render json: ListingSerializer.show_listing(listing), status: 202
     else
       render json: ListingSerializer.no_update(listing), status: 400
     end
