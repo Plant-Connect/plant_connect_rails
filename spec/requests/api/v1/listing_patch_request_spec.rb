@@ -8,6 +8,7 @@ RSpec.describe "Listing Patch/Create", type: :request do
       listing = user.listings.create(quantity: 10, category: "plant", description: "blah blah", plant_id: plant.id)
 
       patch_params = {
+        active: false,
         quantity: 20,
         listing_id: listing.id
       }.to_json
@@ -25,7 +26,7 @@ RSpec.describe "Listing Patch/Create", type: :request do
       expect(json[:data][:type]).to eq("listing")
       expect(json[:data][:attributes]).to be_a Hash
       expect(json[:data][:attributes][:listing_id]).to be_a Integer
-      expect(json[:data][:attributes][:active]).to eq(true)
+      expect(json[:data][:attributes][:active]).to eq(false)
       expect(json[:data][:attributes][:quantity]).to be_a Integer
       expect(json[:data][:attributes][:quantity]).to eq(20)
       expect(json[:data][:attributes][:category]).to be_a String
@@ -34,6 +35,7 @@ RSpec.describe "Listing Patch/Create", type: :request do
       expect(json[:data][:attributes][:plant_id]).to eq(plant.id)
       expect(json[:data][:attributes][:user_id]).to eq(user.id)
 
+      expect(json[:data][:attributes][:active]).to_not eq(true)
       expect(json[:data][:attributes][:quantity]).to_not eq(10)
     end
 
