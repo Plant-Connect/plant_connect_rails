@@ -116,34 +116,23 @@ describe 'Listings API' do
     context 'happy path' do 
       before(:each) do 
         @user = User.create(username: 'Aedan', email: 'aedan@test.com', password: '123password', password_confirmation: '123password', location: 'Denver County, CO')
-        
-        @listing_params = {
-                            user_id: @user.id,
-                            category: 2,
-                            description: 'This is the listings description', 
-                            quantity: 5,
-                            photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', 
-                            plant_type: 'snake plant', 
-                            indoor: true
-                          }.to_json
+
+        @request_body = {                             
+                          user_id: @user.id,
+                          "listing": {
+                                    user_id: @user.id,
+                                    category: 2,
+                                    description: 'This is the listings description', 
+                                    quantity: 5,
+                                    photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', 
+                                    plant_type: 'snake plant', 
+                                    indoor: true
+                                  }
+                                }.to_json
 
         headers = { 'CONTENT_TYPE' => 'application/json' }
 
-        post "/api/v1/listings", headers: headers, params: @listing_params
-
-        # @request_body = {
-        #                   "listing": {
-        #                             user_id: @user.id,
-        #                             plant_id: @plant.id,
-        #                             quantity: 5,
-        #                             category: 2,
-        #                             description: 'This is the listings description'
-        #                   }
-        #                   }
-
-        # headers = { 'CONTENT_TYPE' => 'application/json' }
-
-        # post "/api/v1/listings", headers: headers, params: @request_body
+        post "/api/v1/listings", headers: headers, params: @request_body
       end
 
       it 'has a successful response' do 
@@ -243,19 +232,21 @@ describe 'Listings API' do
     context 'INCOMPLETE params' do 
       before(:each) do 
         @user = User.create(username: 'Aedan', email: 'aedan@test.com', password: '123password', password_confirmation: '123password', location: 'Denver County, CO')
-        
-        @listing_params = {
-                            user_id: @user.id,
-                            category: 2,
-                            description: 'This is the listings description', 
-                            photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', 
-                            plant_type: 'snake plant', 
-                            indoor: true
-                          }.to_json
+
+        @request_body = {                             
+                          user_id: @user.id,
+                          "listing": {
+                                    user_id: @user.id,
+                                    category: 2,
+                                    description: 'This is the listings description', 
+                                    photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', 
+                                    plant_type: 'snake plant', 
+                                  }
+                                }.to_json
 
         headers = { 'CONTENT_TYPE' => 'application/json' }
 
-        post "/api/v1/listings", headers: headers, params: @listing_params
+        post "/api/v1/listings", headers: headers, params: @request_body
       end
       
       it 'returns a 400 error code' do 
