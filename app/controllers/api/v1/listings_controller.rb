@@ -20,11 +20,16 @@ class Api::V1::ListingsController < ApplicationController
       render json: { data: { message: 'user_id param missing or empty' } }, status: 400
     else
       plant = @user.plants.create(plant_params)
-      listing = plant.listings.create(listing_params)
-  
-      if listing.save
-        render json: ListingSerializer.show_listing(listing), status: 201
-      else
+
+      if plant.save
+        listing = plant.listings.create(listing_params)
+
+        if listing.save
+          render json: ListingSerializer.show_listing(listing), status: 201
+        else
+          render json: ListingSerializer.listing_not_created, status: 400
+        end
+      else 
         render json: ListingSerializer.listing_not_created, status: 400
       end
     end 
@@ -45,11 +50,11 @@ class Api::V1::ListingsController < ApplicationController
 
     private
       def listing_params
-        params.permit(:quantity, :category, :user_id, :description, :plant_id, :active, :rooted)
+        params.require(:listing).permit(:quantity, :category, :user_id, :description, :plant_id, :active, :rooted)
       end
 
       def plant_params
-        params.permit(:photo, :plant_type, :indoor)
+        params.require(:listing).permit(:photo, :plant_type, :indoor)
       end
 
       def find_user
