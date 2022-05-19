@@ -229,18 +229,53 @@ describe 'Listings API' do
       end
     end
 
-    context 'INCOMPLETE params' do 
+    context 'INCOMPLETE params - missing plant params only' do 
       before(:each) do 
         @user = User.create(username: 'Aedan', email: 'aedan@test.com', password: '123password', password_confirmation: '123password', location: 'Denver County, CO')
 
         @request_body = {                             
                           user_id: @user.id,
+                          photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', 
+                          indoor: true,
+                          "listing": {
+                                    category: 2,
+                                    quantity: 5,
+                                    user_id: @user.id,
+                                    description: 'This is the listings description',
+                                  }
+                                }.to_json
+
+        headers = { 'CONTENT_TYPE' => 'application/json' }
+
+        post "/api/v1/listings", headers: headers, params: @request_body
+      end
+      
+      it 'returns a 400 error code' do 
+        expect(response.status).to eq(400)
+      end
+    
+      it 'returns error message for invalid params' do 
+        json = JSON.parse(response.body, symbolize_names: true)
+    
+        expect(json).to be_a Hash
+        expect(json[:data]).to be_a Hash
+        expect(json[:data][:type]).to eq('error')
+        expect(json[:data][:message]).to eq("Invalid or incomplete paramaters provided")
+      end
+    end
+
+    context 'INCOMPLETE params - missing listing params only' do 
+      before(:each) do 
+        @user = User.create(username: 'Aedan', email: 'aedan@test.com', password: '123password', password_confirmation: '123password', location: 'Denver County, CO')
+
+        @request_body = {                             
+                          user_id: @user.id,
+                          photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', 
+                          plant_type: 'snake plant', 
+                          indoor: true,
                           "listing": {
                                     user_id: @user.id,
-                                    category: 2,
-                                    description: 'This is the listings description', 
-                                    photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', 
-                                    plant_type: 'snake plant', 
+                                    description: 'This is the listings description',
                                   }
                                 }.to_json
 
@@ -362,15 +397,46 @@ describe 'Listings API' do
         expect(json[:data][:message]).to eq("listing_id is missing or blank")
       end
     end
-
+    
     context 'MISSING ALL params' do
       before(:each) do 
         @user  = User.create(username: 'Aedan2', email: 'aedan2@test.com', password: '123password', password_confirmation: '123password', location: 'Denver, CO')
         @plant = @user.plants.create(photo: 'photo string', plant_type: 'plant_type', indoor: true)
         @listing = @user.listings.create(quantity: 10, category: 2, description: "blah blah", plant_id: @plant.id)
-
+        
         headers = { 'CONTENT_TYPE' => 'application/json' }
         patch "/api/v1/listings", headers: headers
+      end
+      
+      it 'returns a 400 error code' do 
+        expect(response.status).to eq(400)
+      end
+      
+      it 'returns error message for invalid params' do 
+        json = JSON.parse(response.body, symbolize_names: true)
+        
+        expect(json).to be_a Hash
+        expect(json[:data]).to be_a Hash
+        expect(json[:data][:message]).to eq("listing_id is missing or blank")
+      end
+    end
+
+    context 'Listing_id included but other params BLANK' do 
+      before(:each) do 
+        @user  = User.create(username: 'Aedan2', email: 'aedan2@test.com', password: '123password', password_confirmation: '123password', location: 'Denver, CO')
+        @plant = @user.plants.create(photo: 'photo string', plant_type: 'plant_type', indoor: true)
+        @listing = @user.listings.create(quantity: 10, category: 2, description: "blah blah", plant_id: @plant.id)
+
+        @request_body = {                             
+                          user_id: @user.id,
+                          listing_id: @listing.id,
+                          "listing": {
+                                    active: ""
+                                  }
+                                }.to_json
+        
+        headers = { 'CONTENT_TYPE' => 'application/json' }
+        patch "/api/v1/listings", headers: headers, params: @request_body
       end
       
       it 'returns a 400 error code' do 
@@ -382,7 +448,7 @@ describe 'Listings API' do
     
         expect(json).to be_a Hash
         expect(json[:data]).to be_a Hash
-        expect(json[:data][:message]).to eq("listing_id is missing or blank")
+        expect(json[:data][:message]).to eq("Invalid or incomplete paramaters provided. Listing not updated")
       end
     end
 
