@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'no-reply@plantconnect.com'
+  default from: 'planty.raid@yahoo.com'
   layout 'mailer'
 end
