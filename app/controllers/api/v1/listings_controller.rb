@@ -10,7 +10,7 @@ class Api::V1::ListingsController < ApplicationController
       listings = Listing.active_listings_self_excluded(params[:user_id])
       render json: ListingSerializer.listings(listings, params[:user_id])
     else
-      render json: { data: { message: ':user_id param missing or empty' } }, status: 400
+      render json: { data: { message: 'user_id param missing or empty' } }, status: 400
     end
   end
 
@@ -25,11 +25,15 @@ class Api::V1::ListingsController < ApplicationController
   end
 
   def update
-    listing = Listing.find(params[:listing_id])
-    if listing.update(listing_params)
-      render json: ListingSerializer.show_listing(listing), status: 202
+    if params[:listing_id].blank?
+      render json: { data: { message: 'user_id param missing or empty' } }, status: 400
     else
-      render json: ListingSerializer.no_update(listing), status: 400
+      listing = Listing.find(params[:listing_id])
+      if listing.update(listing_params)
+        render json: ListingSerializer.show_listing(listing), status: 202
+      else
+        render json: ListingSerializer.no_update(listing), status: 400
+      end
     end
   end
 
