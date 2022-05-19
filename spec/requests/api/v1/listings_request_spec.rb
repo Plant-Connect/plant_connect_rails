@@ -349,35 +349,31 @@ describe 'Listings API' do
       end
     end
     
-    # context 'EMPTY/BLANK params' do 
-    #   before(:each) do 
-    #     @user  = User.create(username: 'Aedan2', email: 'aedan2@test.com', password: '123password', password_confirmation: '123password', location: 'Denver, CO')
-    #     @plant = @user.plants.create(photo: 'photo string', plant_type: 'plant_type', indoor: true)
-    #     @listing = @user.listings.create(quantity: 10, category: 2, description: "blah blah", plant_id: @plant.id)
+    context 'EMPTY/BLANK params' do 
+      before(:each) do 
+        @user  = User.create(username: 'Aedan2', email: 'aedan2@test.com', password: '123password', password_confirmation: '123password', location: 'Denver, CO')
+        @plant = @user.plants.create(photo: 'photo string', plant_type: 'plant_type', indoor: true)
+        @listing = @user.listings.create(quantity: 10, category: 2, description: "blah blah", plant_id: @plant.id)
 
-    #     @patch_params = {
-    #       active: false,
-    #       quantity: 20,
-    #       listing_id: @listing.id
-    #     }.to_json
+        @patch_params = {
+        }.to_json
 
-    #     headers = { 'CONTENT_TYPE' => 'application/json' }
-    #     patch "/api/v1/listings", headers: headers, params: @patch_params
-    #   end
+        headers = { 'CONTENT_TYPE' => 'application/json' }
+        patch "/api/v1/listings", headers: headers, params: @patch_params
+      end
       
-      # it 'returns a 400 error code' do 
-      #   expect(response.status).to eq(400)
-      # end
+      it 'returns a 400 error code' do 
+        expect(response.status).to eq(400)
+      end
     
-      # it 'returns error message for invalid params' do 
-      #   json = JSON.parse(response.body, symbolize_names: true)
+      it 'returns error message for invalid params' do 
+        json = JSON.parse(response.body, symbolize_names: true)
     
-      #   expect(json).to be_a Hash
-      #   expect(json[:data]).to be_a Hash
-      #   expect(json[:data][:type]).to eq('error')
-        # expect(json[:data][:attributes][:message]).to eq("Invalid or incomplete paramaters provided. Listing not updated")
-      # end
-    # end
+        expect(json).to be_a Hash
+        expect(json[:data]).to be_a Hash
+        expect(json[:data][:message]).to eq("user_id param missing or empty")
+      end
+    end
 
     # context 'INCOMPLETE params' do 
     #   before(:each) do 
