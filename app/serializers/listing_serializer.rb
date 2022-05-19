@@ -58,9 +58,9 @@ class ListingSerializer
     {
       data: {
         id: nil,
-        type: "listing",
+        type: "error",
         attributes: {
-          description: "Form filled out incorrectly, Listing was not updated",
+          message: "Invalid or incomplete paramaters provided. Listing not updated",
           listing_id: listing.id
         }
       }
