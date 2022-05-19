@@ -116,17 +116,17 @@ describe 'Listings API' do
     context 'happy path' do 
       before(:each) do 
         @user = User.create(username: 'Aedan', email: 'aedan@test.com', password: '123password', password_confirmation: '123password', location: 'Denver County, CO')
-
+      
         @request_body = {                             
                           user_id: @user.id,
+                          photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', 
+                          plant_type: 'snake plant', 
+                          indoor: true,
                           "listing": {
-                                    user_id: @user.id,
                                     category: 2,
-                                    description: 'This is the listings description', 
                                     quantity: 5,
-                                    photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', 
-                                    plant_type: 'snake plant', 
-                                    indoor: true
+                                    user_id: @user.id,
+                                    description: 'This is the listings description',
                                   }
                                 }.to_json
 
