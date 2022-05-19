@@ -41,7 +41,7 @@ RSpec.describe UserNotifierMailer, type: :mailer do
     it 'renders the headers' do
       expect(@mail.subject).to eq('New plant listings in your area!')
       expect(@mail.to).to eq(['aedan@test.com'])
-      expect(@mail.from).to eq(['no-reply@plantconnect.com'])
+      expect(@mail.from).to eq(['planty.raid@yahoo.com'])
     end
 
     it 'renders the body' do
