@@ -25,6 +25,7 @@ class Api::V1::ListingsController < ApplicationController
         listing = plant.listings.create(listing_params)
 
         if listing.save
+          listing.send_new_listing_email
           render json: ListingSerializer.show_listing(listing), status: 201
         else
           render json: ListingSerializer.listing_not_created, status: 400
