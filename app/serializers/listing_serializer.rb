@@ -1,4 +1,7 @@
 class ListingSerializer
+
+  include Rails.application.routes.url_helpers
+
   def self.listings(listings, user_id)
     {
       "data": {
@@ -15,7 +18,7 @@ class ListingSerializer
               "user_id": listing.user_id,
               "description": listing.description,
               "plant": {
-                  "photo": listing.plant.photo,
+                  "photo": featured_image(listing),
                   "plant_type": listing.plant.plant_type,
                   "indoor": listing.plant.indoor
               }
@@ -23,6 +26,16 @@ class ListingSerializer
           end
       }
   }
+  end
+
+  def self.featured_image(listing)
+    if listing.plant.image.attached?
+      {
+        url: rails_blob_url(listing.plant.image)
+      }
+    else
+      listing.plant.photo
+    end
   end
 
   def self.show_listing(listing)
