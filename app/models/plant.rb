@@ -9,4 +9,6 @@ class Plant < ApplicationRecord
   # Model Relationships
   belongs_to :user
   has_many :listings, dependent: :destroy
+  # not a DB attribute like :photo is 
+  has_one_attached :image
 end
