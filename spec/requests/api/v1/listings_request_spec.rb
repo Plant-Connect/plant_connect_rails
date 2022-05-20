@@ -135,7 +135,7 @@ describe 'Listings API' do
         post "/api/v1/listings", headers: headers, params: @request_body
       end
 
-      it 'has a successful response' do 
+      it 'has a successful response' do
         expect(response).to be_successful
         expect(response).to have_http_status(201)
       end
