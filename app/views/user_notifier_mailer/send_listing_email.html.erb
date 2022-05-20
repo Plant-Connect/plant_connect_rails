@@ -1,13 +1,29 @@
 Hi <%= @recipient_name %>, 
+<br>
 
-Check out the newest listing from Plant Connect! 
+<body>
+  Check out the newest listing from Plant Connect! 
 
-<%= @listing.plant.photo %>
 
-<%= @listing.plant.plant_type %>
+  <img src="<%= @listing.plant.photo %>" alt="Plant Photo">
 
-<%= @listing.quantity %>
-
-<%= @listing.description %>
-
-<%= @listing.category %>
+  <ul>
+    <li>
+      Type: <%= @listing.plant.plant_type %>
+    </li>
+    <li>
+      Category: <%= @listing.category %>
+    </li>
+    <li>
+      Rooted: <%= @listing.rooted %>
+    </li>
+    <li>
+      Quantity available: <%= @listing.quantity %>
+    </li>
+    <li>
+      Listing Description: <%= @listing.description %>
+    </li>
+  </ul>
+  <br>
+  Come back to Plant Connect to see the rest of the listings in your area!
+</body>

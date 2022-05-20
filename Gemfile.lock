@@ -256,6 +256,7 @@ DEPENDENCIES
   pry
   puma (~> 3.11)
   rails (~> 5.2.7, >= 5.2.7.1)
+  redis (~> 4.0)
   rspec-rails
   rspec_junit_formatter
   shoulda-matchers

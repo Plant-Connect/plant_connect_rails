@@ -66,17 +66,4 @@ class ListingSerializer
       }
     }
   end
-
-  def self.no_update(listing)
-    {
-      data: {
-        id: nil,
-        type: "error",
-        attributes: {
-          message: "Invalid or incomplete paramaters provided. Listing not updated",
-          listing_id: listing.id
-        }
-      }
-    }
-  end
 end

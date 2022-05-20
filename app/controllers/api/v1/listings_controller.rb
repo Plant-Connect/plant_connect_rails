@@ -17,7 +17,7 @@ class Api::V1::ListingsController < ApplicationController
 
   def create
     if params[:user_id].blank?
-      render json: { data: { message: 'user_id param missing or empty' } }, status: 400
+      json_response({ data: { message: 'user_id param missing or empty' } }, :bad_request)
     else
       plant = @user.plants.create(plant_params)
 
@@ -25,25 +25,28 @@ class Api::V1::ListingsController < ApplicationController
         listing = plant.listings.create(listing_params)
 
         if listing.save
-          render json: ListingSerializer.show_listing(listing), status: 201
+          listing.send_new_listing_email
+          json_response(ListingSerializer.show_listing(listing), :created)
         else
-          render json: ListingSerializer.listing_not_created, status: 400
+          json_response(ListingSerializer.listing_not_created, :bad_request)
         end
       else 
-        render json: ListingSerializer.listing_not_created, status: 400
+        json_response(ListingSerializer.listing_not_created, :bad_request)
       end
     end 
   end
 
   def update
     if params[:listing_id].blank?
-      render json: { data: { message: 'user_id param missing or empty' } }, status: 400
+      json_response({ data: { message: 'listing_id is missing or blank' } }, :bad_request)
+    elsif params[:listing].blank?
+      json_response({ data: { message: 'Invalid or incomplete paramaters provided. Listing not updated' } }, :bad_request)
     else
       listing = Listing.find(params[:listing_id])
       if listing.update(listing_params)
-        render json: ListingSerializer.show_listing(listing), status: 202
+        json_response(ListingSerializer.show_listing(listing), :accepted)
       else
-        render json: ListingSerializer.no_update(listing), status: 400
+        json_response({ data: { message: 'Invalid or incomplete paramaters provided. Listing not updated' } }, :bad_request)
       end
     end
   end
