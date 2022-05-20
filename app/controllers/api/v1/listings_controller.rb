@@ -54,7 +54,7 @@ class Api::V1::ListingsController < ApplicationController
       end
 
       def plant_params
-        params.require(:listing).permit(:photo, :plant_type, :indoor)
+        params.require(:listing).permit(:photo, :plant_type, :indoor, :image)
       end
 
       def find_user
