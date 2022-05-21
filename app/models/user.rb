@@ -10,4 +10,5 @@ class User < ApplicationRecord
   # Model Relationships
   has_many :plants, dependent: :destroy
   has_many :listings, dependent: :destroy
+  has_many :messages, dependent: :destroy
 end
