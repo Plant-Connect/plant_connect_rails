@@ -3,5 +3,5 @@ class Message < ApplicationRecord
                         :user_id
 
   belongs_to :user
-  # belongs_to :conversation
+  belongs_to :conversation
 end
