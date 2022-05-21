@@ -4,6 +4,10 @@ require 'spec_helper'
 require 'sidekiq/testing' 
 Sidekiq::Testing.fake! # fake is the default mode
 
+# Using the 'inline' method will allow the test to actually hit the method and count towards SimpleCov
+# coverage, but I'm unsure of what it's doing behind the scenes. 
+# Sidekiq::Testing.inline! # fake is the default mode
+
 require 'simplecov'
 SimpleCov.start
 
