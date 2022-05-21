@@ -8,7 +8,6 @@ RSpec.describe Message, type: :model do
 
   describe 'relationships' do
     it { should belong_to :user }
-    it { should have_many :conversation_messages }
-    it { should have_many(:conversations).through(:conversation_messages) }
+    # it { should belong_to :conversation }
   end
 end 
