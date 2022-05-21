@@ -40,6 +40,7 @@ group :development, :test do
   gem 'rspec_junit_formatter'
   gem 'faker'
   gem 'factory_bot_rails'
+  gem 'action-cable-testing'
 end
 
 group :development do
@@ -56,7 +57,6 @@ group :test do
   gem 'capybara'
   gem 'vcr', '~> 6.1.0'
   gem 'webmock', '~> 3.14'
-  gem 'action-cable-testing'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
