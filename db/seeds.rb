@@ -1,6 +1,10 @@
 
 User.destroy_all
 Plant.destroy_all
+Listing.destroy_all
+ActiveRecord::Base.connection.reset_pk_sequence!('users')
+ActiveRecord::Base.connection.reset_pk_sequence!('plants')
+ActiveRecord::Base.connection.reset_pk_sequence!('listings')
 
 user1 = User.create(username: 'Aedan', email: 'aedan@test.com', password: '123password', password_confirmation: '123password', location: 'Denver County, CO')
 user2 = User.create(username: 'Brenda', email: 'brenda@test.com', password: 'password123', password_confirmation: 'password123', location: 'Denver County, CO')
@@ -10,6 +14,9 @@ user5 = User.create(username: 'Katie', email: 'katie_a@test.com', password: 'see
 user6 = User.create(username: 'Katie', email: 'katie_t@test.com', password: 'stemswap', password_confirmation: 'stemswap', location: 'Jefferson County, CO')
 user7 = User.create(username: 'Paul', email: 'paul@test.com', password: 'plantydropper', password_confirmation: 'plantydropper', location: 'Jefferson County, CO')
 user8 = User.create(username: 'Steven', email: 'HireStevenJames@gmail.com', password: 'nogreenthumbs', password_confirmation: 'nogreenthumbs', location: 'Denver County, CO')
+user9 = User.create(username: 'Colton', email: 'StevenJamesSTL@gmail.com', password: 'nogreenthumbs', password_confirmation: 'nogreenthumbs', location: 'Jefferson County, CO')
+user10 = User.create(username: 'Ashley', email: 'amjames.design@gmail.com', password: 'nogreenthumbs', password_confirmation: 'nogreenthumbs', location: 'Jefferson County, CO')
+user11 = User.create(username: 'Scott', email: 'scott@turing.edu', password: 'nogreenthumbs', password_confirmation: 'nogreenthumbs', location: 'Denver County, CO')
 
 plant1 = Plant.create(photo: "https://images.pexels.com/photos/1407305/pexels-photo-1407305.jpeg", plant_type: "monstera", indoor: true, user_id: user1.id)
 plant2 = Plant.create(photo: "https://images.pexels.com/photos/1084199/pexels-photo-1084199.jpeg", plant_type: "pothos", indoor: true, user_id: user1.id)
