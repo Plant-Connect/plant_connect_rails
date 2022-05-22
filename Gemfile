@@ -40,6 +40,7 @@ group :development, :test do
   gem 'rspec_junit_formatter'
   gem 'faker'
   gem 'factory_bot_rails'
+  gem 'action-cable-testing'
 end
 
 group :development do
@@ -54,8 +55,6 @@ group :test do
   gem 'shoulda-matchers'
   gem 'simplecov'
   gem 'capybara'
-  gem 'factory_bot_rails'
-  gem 'faker'
   gem 'vcr', '~> 6.1.0'
   gem 'webmock', '~> 3.14'
 end
