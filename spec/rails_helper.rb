@@ -9,7 +9,9 @@ Sidekiq::Testing.fake! # fake is the default mode
 # Sidekiq::Testing.inline! # fake is the default mode
 
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start do
+  add_filter "config/initializers/sidekiq.rb"
+end
 
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
