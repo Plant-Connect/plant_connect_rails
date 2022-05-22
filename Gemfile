@@ -57,6 +57,7 @@ group :test do
   gem 'capybara'
   gem 'vcr', '~> 6.1.0'
   gem 'webmock', '~> 3.14'
+  gem 'rspec-sidekiq'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
