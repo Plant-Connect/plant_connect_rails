@@ -1,3 +1,11 @@
+#bannerimage {
+  width: 100%;
+  background-image: url(https://user-images.githubusercontent.com/91357724/169707666-653ef15f-46c2-47be-ae27-1a6c467b89ef.png);
+  height: 405px;
+  background-position: center;
+}
+<div id="bannerimage"></div>
+
 Hi <%= @recipient_name %>, 
 <br>
 
@@ -5,7 +13,10 @@ Hi <%= @recipient_name %>,
   Check out the newest listing from Plant Connect! 
 
 
-  <img src="<%= @listing.plant.photo %>" alt="Plant Photo">
+  <img src="<%= @listing.plant.photo %>"
+        alt="Plant Photo"
+        width="500"
+        height="auto">
 
   <ul>
     <li>

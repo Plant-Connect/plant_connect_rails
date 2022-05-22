@@ -4,6 +4,10 @@ require 'spec_helper'
 require 'sidekiq/testing' 
 Sidekiq::Testing.fake! # fake is the default mode
 
+# Using the 'inline' method will allow the test to actually hit the method and count towards SimpleCov
+# coverage, but I'm unsure of what it's doing behind the scenes. 
+# Sidekiq::Testing.inline! # fake is the default mode
+
 require 'simplecov'
 SimpleCov.start
 
@@ -69,6 +73,9 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # Adds testing helpers to test ActionCable and WebSockets
+  config.include ActionCable::TestHelper
 end
 
 Shoulda::Matchers.configure do |config|
@@ -76,6 +83,17 @@ Shoulda::Matchers.configure do |config|
     with.test_framework :rspec
     with.library :rails
   end
+end
+
+RSpec::Sidekiq.configure do |config|
+  # Clears all job queues before each example
+  config.clear_all_enqueued_jobs = true # default => true
+
+  # Whether to use terminal colours when outputting messages
+  config.enable_terminal_colours = true # default => true
+
+  # Warn when jobs are not enqueued to Redis but to a job array
+  config.warn_when_jobs_not_processed_by_sidekiq = true # default => true
 end
 
 VCR.configure do |config|

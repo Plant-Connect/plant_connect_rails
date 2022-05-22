@@ -15,6 +15,9 @@ RSpec.describe User, type: :model do
   describe 'relationships' do 
     it { should have_many :plants }
     it { should have_many :listings }
+    it { should have_many :messages }
+    it { should have_many :user_conversations }
+    it { should have_many(:conversations).through(:user_conversations) }
   end
 
   describe 'user creation' do 
