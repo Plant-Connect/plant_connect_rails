@@ -292,7 +292,69 @@ RSpec.describe 'Messages API', :type => :request do
     
         expect(json).to be_a Hash
         expect(json[:data]).to be_a Hash
-        expect(json[:data][:message]).to eq("user_id param missing or empty")
+        expect(json[:data][:message]).to eq("user_id and listing_id are required to create conversation")
+      end
+    end
+
+    context 'MISSING listing_id' do
+      before(:each) do
+          @user1 = User.create!(
+                                username: 'Steven', 
+                                email: 'steven@test.com', 
+                                password: 'password123', 
+                                password_confirmation: 'password123', 
+                                location: 'Denver, CO'
+                              )
+        
+          @user2 = User.create!(
+                                  username: 'Colton', 
+                                  email: 'colton@test.com', 
+                                  password: '123password', 
+                                  password_confirmation: '123password', 
+                                  location: 'Denver, CO'
+                                )
+          
+          @plant = @user1.plants.create(
+                                          photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', 
+                                          plant_type: 'snake plant', 
+                                          indoor: true
+                                        )
+          
+          @listing = @user1.listings.create!(
+                                              plant_id: @plant.id, 
+                                              quantity: 2, 
+                                              category: 1, 
+                                              description: 'This is the listings description', 
+                                              rooted: true, 
+                                              active: true
+                                            )
+
+          @conversation = Conversation.create!
+        
+          @request_body = {
+                            "user_id": @user2.id,
+                            "message": {
+                                        "conversation_id": @conversation.id,
+                                        "user_id": @user2.id, 
+                                        "content": "I'm very interested in your snake plant."
+                                        }
+                          }.to_json
+  
+          headers = { 'CONTENT_TYPE' => 'application/json' }
+  
+          post "/api/v1/messages", headers: headers, params: @request_body
+        end
+      
+      it 'returns a 400 error code' do 
+        expect(response.status).to eq(400)
+      end
+    
+      it 'returns error message for invalid params' do 
+        json = JSON.parse(response.body, symbolize_names: true)
+    
+        expect(json).to be_a Hash
+        expect(json[:data]).to be_a Hash
+        expect(json[:data][:message]).to eq("user_id and listing_id are required to create conversation")
       end
     end
 
