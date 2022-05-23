@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :listings, only: [:index, :create]
       patch '/listings', to: 'listings#update'
+      resources :messages, only: [:create]
     end
   end
 end
