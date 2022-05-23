@@ -2,9 +2,10 @@ class Plant < ApplicationRecord
   include Rails.application.routes.url_helpers
 
   # Model Validations
-  validates_presence_of :photo,
-                        :plant_type,
+  validates_presence_of :plant_type,
                         :user_id
+                        # temporarily commented out photo validation in order to attach cloudinary photo url to plant after creation
+                        # :photo
   
   validates :indoor, inclusion: { in: [true, false] }
   
