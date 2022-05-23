@@ -6,6 +6,8 @@ class Api::V1::MessagesController < ApplicationController
     # and create a conversation_id to include in our response
     if params[:user_id].blank? || params[:listing_id].blank?
       json_response({ data: { message: 'user_id and listing_id are required to create conversation' } }, :bad_request)
+    elsif params[:message][:content].blank?
+      json_response({ data: { message: 'missing message content' } }, :bad_request)
     else
       if params[:message][:conversation_id].blank? 
         conversation = Conversation.create!()
