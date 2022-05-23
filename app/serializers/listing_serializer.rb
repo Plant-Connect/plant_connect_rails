@@ -18,7 +18,7 @@ class ListingSerializer
               "user_id": listing.user_id,
               "description": listing.description,
               "plant": {
-                  "photo": featured_image(listing),
+                  "photo": listing.plant.photo,
                   "plant_type": listing.plant.plant_type,
                   "indoor": listing.plant.indoor
               }
@@ -28,15 +28,15 @@ class ListingSerializer
   }
   end
 
-  def self.featured_image(listing)
-    if listing.plant.image.attached?
-      {
-        url: rails_blob_url(listing.plant.image)
-      }
-    else
-      listing.plant.photo
-    end
-  end
+  # def self.featured_image(listing)
+  #   if listing.plant.image.attached?
+  #     {
+  #       url: rails_blob_url(listing.plant.image)
+  #     }
+  #   else
+  #     listing.plant.photo
+  #   end
+  # end
 
   def self.show_listing(listing)
     {
