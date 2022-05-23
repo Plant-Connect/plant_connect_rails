@@ -87,6 +87,36 @@ RSpec.describe 'Messages API', :type => :request do
           expect(json[:data][:attributes][:content]).to be_a String
           expect(json[:data][:attributes][:content]).to eq("I'm very interested in your snake plant.")
         end
+
+        it 'creates UserConversation for both sender and listing owner' do
+          expect(UserConversation.count).to eq(2)
+
+          expect(UserConversation.first.user).to eq(@user2)
+
+          expect(UserConversation.last.user).to eq(@user1)
+
+          expect(Conversation.count).to eq(1)
+          
+          expect(UserConversation.first.conversation).to eq(Conversation.last)
+          expect(UserConversation.last.conversation).to eq(Conversation.last)
+        end
+        
+        it 'Conversation includes both users through UserConversation' do
+          expect(Conversation.count).to eq(1)
+          conversation = Conversation.last 
+          
+          expect(conversation.users).to eq([@user1, @user2])
+        end
+        
+        it 'Conversation has 1 message' do 
+          expect(Conversation.count).to eq(1)
+          conversation = Conversation.last 
+          
+          expect(conversation.messages.count).to eq(1)
+          message = conversation.messages.last
+
+          expect(message.content).to eq("I'm very interested in your snake plant.")
+        end
       end
 
       context 'Conversation already exists and ID is passed with new message' do 
