@@ -16,10 +16,13 @@ class Api::V1::ListingsController < ApplicationController
       json_response({ data: { message: 'user_id param missing or empty' } }, :bad_request)
     else
       plant = @user.plants.create(plant_params)
-
       if plant.save
-        listing = plant.listings.create(listing_params)
-
+        if plant.image.attached?
+          plant.update(photo: url_for(plant.image))
+          listing = plant.listings.create(listing_params)
+        else
+          listing = plant.listings.create(listing_params)
+        end
         if listing.save
           listing.send_new_listing_email
           json_response(ListingSerializer.show_listing(listing), :created)
@@ -53,7 +56,7 @@ class Api::V1::ListingsController < ApplicationController
       end
 
       def plant_params
-        params.permit(:photo, :plant_type, :indoor)
+        params.permit(:photo, :plant_type, :indoor, :image)
       end
 
       def find_user
