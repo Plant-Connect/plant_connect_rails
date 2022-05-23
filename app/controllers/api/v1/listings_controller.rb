@@ -1,5 +1,4 @@
 class Api::V1::ListingsController < ApplicationController
-  before_action :find_user, only: [:create]
 
   def index
     # return all active listings (excluding users own listings)
@@ -15,7 +14,8 @@ class Api::V1::ListingsController < ApplicationController
     if params[:user_id].blank?
       json_response({ data: { message: 'user_id param missing or empty' } }, :bad_request)
     else
-      plant = @user.plants.create(plant_params)
+      user = User.find_by_id(params[:user_id])
+      plant = user.plants.create(plant_params)
       if plant.save
         if plant.image.attached?
           plant.update(photo: url_for(plant.image))
@@ -57,9 +57,5 @@ class Api::V1::ListingsController < ApplicationController
 
       def plant_params
         params.permit(:photo, :plant_type, :indoor, :image)
-      end
-
-      def find_user
-        @user = User.find_by_id(params[:user_id])
       end
 end
