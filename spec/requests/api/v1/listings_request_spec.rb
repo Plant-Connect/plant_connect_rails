@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Listings API' do
+RSpec.describe 'Listings API', :type => :request do 
 
   context 'listings#index' do 
 
