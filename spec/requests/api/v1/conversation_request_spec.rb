@@ -118,5 +118,71 @@ RSpec.describe 'Conversations API', :type => :request do
         end 
       end
     end
+
+    context 'MISSING user_id' do 
+      before(:each) do
+        @user1 = User.create!(
+                              username: 'Steven', 
+                              email: 'steven@test.com', 
+                              password: 'password123', 
+                              password_confirmation: 'password123', 
+                              location: 'Denver, CO'
+                            )
+        @user2 = User.create!(
+                                username: 'Colton', 
+                                email: 'colton@test.com', 
+                                password: '123password', 
+                                password_confirmation: '123password', 
+                                location: 'Denver, CO'
+                              )
+        @user3 = User.create!(
+                                username: 'Ashley', 
+                                email: 'ashley@test.com', 
+                                password: '456password', 
+                                password_confirmation: '456password', 
+                                location: 'Denver, CO'
+                              )
+        @plant = @user1.plants.create(
+                                        photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', 
+                                        plant_type: 'snake plant', 
+                                        indoor: true
+                                      )
+        
+        @listing = @user1.listings.create!(
+                                            plant_id: @plant.id, 
+                                            quantity: 2, 
+                                            category: 1, 
+                                            description: 'This is the listings description', 
+                                            rooted: true, 
+                                            active: true
+                                          )
+        @conversation1 = Conversation.create!()
+        @conversation2 = Conversation.create!()
+
+        @user1convo1 = UserConversation.create(user_id: @user1.id, conversation_id: @conversation1.id)
+        @user1convo2 = UserConversation.create(user_id: @user1.id, conversation_id: @conversation2.id)
+        @user2convo1 = UserConversation.create(user_id: @user2.id, conversation_id: @conversation1.id)
+        @user3convo2 = UserConversation.create(user_id: @user3.id, conversation_id: @conversation2.id)
+
+        @message1 = Message.create!(user_id: @user2.id, conversation_id: @conversation1.id, content: 'Thats a nice plant.')
+        @message2 = Message.create!(user_id: @user2.id, conversation_id: @conversation1.id, content: 'Can I have it?')
+        @message3 = Message.create!(user_id: @user3.id, conversation_id: @conversation2.id, content: 'Sweet snake plant.')
+        @message4 = Message.create!(user_id: @user1.id, conversation_id: @conversation1.id, content: 'Of course')
+  
+        get '/api/v1/conversations'
+      end
+      
+      it 'returns a 400 error code' do 
+        expect(response.status).to eq(400)
+      end
+    
+      it 'returns error message for invalid params' do 
+        json = JSON.parse(response.body, symbolize_names: true)
+    
+        expect(json).to be_a Hash
+        expect(json[:data]).to be_a Hash
+        expect(json[:data][:message]).to eq("user_id is required to view conversations")
+      end
+    end
   end 
 end 
