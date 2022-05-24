@@ -16,28 +16,28 @@ RSpec.describe 'Messages API', :type => :request do
                                 location: 'Denver, CO'
                               )
         
-        @user2 = User.create!(
-                                username: 'Colton', 
-                                email: 'colton@test.com', 
-                                password: '123password', 
-                                password_confirmation: '123password', 
-                                location: 'Denver, CO'
-                              )
-        
-        @plant = @user1.plants.create(
-                                        photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', 
-                                        plant_type: 'snake plant', 
-                                        indoor: true
-                                      )
-        
-        @listing = @user1.listings.create!(
-                                            plant_id: @plant.id, 
-                                            quantity: 2, 
-                                            category: 1, 
-                                            description: 'This is the listings description', 
-                                            rooted: true, 
-                                            active: true
-                                          )
+          @user2 = User.create!(
+                                  username: 'Colton', 
+                                  email: 'colton@test.com', 
+                                  password: '123password', 
+                                  password_confirmation: '123password', 
+                                  location: 'Denver, CO'
+                                )
+          
+          @plant = @user1.plants.create(
+                                          photo: 'https://user-images.githubusercontent.com/91357724/168396277-da1c9486-fbe9-4e9f-8fb7-68ed88e42489.jpeg', 
+                                          plant_type: 'snake plant', 
+                                          indoor: true
+                                        )
+          
+          @listing = @user1.listings.create!(
+                                              plant_id: @plant.id, 
+                                              quantity: 2, 
+                                              category: 1, 
+                                              description: 'This is the listings description', 
+                                              rooted: true, 
+                                              active: true
+                                            )
         
           @request_body = {
                             "listing_id": @listing.id,
