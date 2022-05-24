@@ -12,7 +12,6 @@
       <a href="#api-info">API Info</a>
       <ul>
         <li><a href="#exposed">Exposed</a></li>
-        <li><a href="#consumed">Consumed</a></li>
       </ul>
     </li>
     <li><a href="#built-with">Built With</a></li>
@@ -32,21 +31,28 @@
 - **_Project description needed_**
 - [Front End Repo](https://github.com/Plant-Connect/plant-connect-FE)
 - [Heroku - Back End](https://plant-connect-be.herokuapp.com/)
-- **_Heroku FE link needed_**
+- **_FE deployment link needed_**
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Getting Started
 
-1. Fork and Clone the repo: [GitHub - Plant-Connect/plant_connect_rails](https://github.com/Plant-Connect/plant_connect_rails)
+1. Fork and Clone the repo: <a href="https://github.com/Plant-Connect/plant_connect_rails">GitHub - Plant-Connect/plant_connect_rails</a>
 2. Install gem packages: `bundle install`
-3. Setup the database: `rails db:{create,migrate}`
-4. **_Will there be any API keys needed?_**
-5. Setup Figaro: `bundle exec figaro install`
-6. Add API keys to `config/application.yml`
+3. Setup the database: `rails db:{create,migrate,seed}`
+4. Setup email address and email application security password for the Sidekiq background mailers.
+    - <i> *We used a team yahoo account, but you could easily convert to work with Gmail, etc* </i>
+5. Setup Heroku for Deployment with the Redis add-on
+    - Set-up instructions to deploy a Rails app: <a href= "https://devcenter.heroku.com/articles/getting-started-with-rails5">Heroku - Getting Started With Rails</a>
+    - Set-up instructions for Redis add-on: <a href= "https://devcenter.heroku.com/articles/getting-started-with-rails">Heroku Redis</a>
+6. Setup Figaro: `bundle exec figaro install`
+7. Add environment variables to `config/application.yml`
  - 
     ```
-    <put_environment_variable_name_here>: <put_your_key_here>
+    REDIS_URL: <put_your_key_here>
+    REDISTOGO_URL: <put_your_key_here>
+    yahoo_user_name: <put_your_key_here>
+    yahoo_pw: <put_your_key_here>
     ```
     
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -90,12 +96,7 @@
     ```
     
     <p align="right">(<a href="#top">back to top</a>)</p>
-    
-
-  ### Consumed:
-    - _API name?_
-      - [_Link to API_](https://openweathermap.org/api/one-call-api)
-        - _what was it used for?_
+   
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -104,7 +105,7 @@
 - Framework: Ruby on Rails
   - Versions
     - Ruby: 2.7.4
-    - Rails: 5.2.6
+    - Rails: 5.2.7
 - Database: PostgreSQL
 - Deployment: Heroku
 - Other tech used:
