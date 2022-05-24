@@ -21,15 +21,15 @@ RSpec.describe 'Listings API', :type => :request do
 
       it 'returns a json of expected data' do 
         data = JSON.parse(response.body, symbolize_names: true)[:data]
-        
-        expect(data.keys).to eq([:id, :type, :attributes])
+        expect(data[0].keys).to eq([:id, :type, :attributes])
       end
       
-      it 'attributes match expected JSON contract' do 
-        listings = JSON.parse(response.body, symbolize_names: true)[:data][:attributes]
-        
+      it 'attributes match expected JSON contract' do
+        listings = JSON.parse(response.body, symbolize_names: true)[:data]
         listings.each do |listing|
-          expect(listing.keys).to eq([:listing_id, :active, :quantity, :category, :rooted, :plant_id, :user_id, :description, :plant])
+          expect(listing.keys).to eq([:id, :type, :attributes])
+          expect(listing[:attributes].keys).to eq([:active, :quantity, :category, :rooted, :plant_id, :user_id, :description, :plant])
+          expect(listing[:attributes][:plant].keys).to eq([:id, :photo, :plant_type, :indoor, :user_id, :created_at, :updated_at])
         end
       end
       
@@ -37,27 +37,28 @@ RSpec.describe 'Listings API', :type => :request do
         json = JSON.parse(response.body, symbolize_names: true)
 
         expect(json).to be_a Hash
-        expect(json[:data]).to be_a Hash
-        expect(json[:data][:type]).to eq("listings")
-        expect(json[:data][:attributes]).to be_an Array
 
-        json[:data][:attributes].each do |listing|
-          # Listing Data for all listings returned in array
-          expect(listing).to be_a Hash
-          expect(listing[:listing_id]).to be_an Integer
-          expect(listing[:plant_id]).to be_a Integer
-          expect(listing[:user_id]).to be_a Integer
-          expect(listing[:active].class).to eq(TrueClass) | eq(FalseClass)
-          expect(listing[:quantity]).to be_an Integer
-          expect(listing[:category]).to be_a String
-          expect(listing[:rooted].class).to eq(TrueClass) | eq(FalseClass)
-          expect(listing[:description]).to be_a String
+        expect(json[:data]).to be_a Array
+        json[:data].each do |listing|
+          expect(listing[:type]).to eq("listing")
+          expect(listing[:attributes]).to be_an Hash
+        end
+        json[:data].each do |listing|
+          expect(listing[:attributes]).to be_a Hash
+          expect(listing[:id]).to be_an String
+          expect(listing[:attributes][:plant_id]).to be_a Integer
+          expect(listing[:attributes][:user_id]).to be_a Integer
+          expect(listing[:attributes][:active].class).to eq(TrueClass) | eq(FalseClass)
+          expect(listing[:attributes][:quantity]).to be_an Integer
+          expect(listing[:attributes][:category]).to be_a String
+          expect(listing[:attributes][:rooted].class).to eq(TrueClass) | eq(FalseClass)
+          expect(listing[:attributes][:description]).to be_a String
 
           # Plant data for each listing returned
-          expect(listing[:plant]).to be_a Hash
-          expect(listing[:plant][:photo]).to be_a String
-          expect(listing[:plant][:plant_type]).to be_a String
-          expect(listing[:plant][:indoor].class).to eq(TrueClass) | eq(FalseClass)
+          expect(listing[:attributes][:plant]).to be_a Hash
+          expect(listing[:attributes][:plant][:photo]).to be_a String
+          expect(listing[:attributes][:plant][:plant_type]).to be_a String
+          expect(listing[:attributes][:plant][:indoor].class).to eq(TrueClass) | eq(FalseClass)
         end
       end
     end

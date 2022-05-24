@@ -4,7 +4,7 @@ class Api::V1::ListingsController < ApplicationController
     # return all active listings (excluding users own listings)
     if params[:user_id].present?
       listings = Listing.active_listings_self_excluded(params[:user_id])
-      render json: ListingSerializer.listings(listings, params[:user_id])
+      render json: ListingSerializer.new(listings)
     else
       render json: { data: { message: 'user_id param missing or empty' } }, status: 400
     end
