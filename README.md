@@ -256,22 +256,22 @@
       "content": "That's a really nice plant. Can I have it?"
      }
      ```
-  - Response
-    ```
-    Status Code: 201
-    
-    {
-      "data": {
-          "id": "2",
-          "type": "message",
-          "attributes": {
-              "conversation_id": 3,
-              "user_id": 2,
-              "content": "That's a really nice plant. Can I have it?"
-          }
+    - Response
+      ```
+      Status Code: 201
+
+      {
+        "data": {
+            "id": "2",
+            "type": "message",
+            "attributes": {
+                "conversation_id": 3,
+                "user_id": 2,
+                "content": "That's a really nice plant. Can I have it?"
+            }
+        }
       }
-    }
-    ```
+      ```
   - Example Request (With conversation_id included. Creates new message within existing conversation.)
      ```
      POST /api/v1/messages
@@ -283,22 +283,22 @@
       "conversation_id": 3
      }
      ```
-  - Response
-    ```
-    Status Code: 201
-    
-    {
-      "data": {
-          "id": "3",
-          "type": "message",
-          "attributes": {
-              "conversation_id": 3,
-              "user_id": 1,
-              "content": "Of course you can have it. You'll love Planty!"
+    - Response
+      ```
+      Status Code: 201
+
+      {
+        "data": {
+            "id": "3",
+            "type": "message",
+            "attributes": {
+                "conversation_id": 3,
+                "user_id": 1,
+                "content": "Of course you can have it. You'll love Planty!"
+            }
           }
-        }
-    }
-    ```
+      }
+      ```
       
 - **Get all conversations for a single User**: 
   - `GET /api/v1/conversations`
