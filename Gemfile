@@ -55,8 +55,6 @@ group :test do
   gem 'shoulda-matchers'
   gem 'simplecov'
   gem 'capybara'
-  gem 'vcr', '~> 6.1.0'
-  gem 'webmock', '~> 3.14'
   gem 'rspec-sidekiq'
 end
 

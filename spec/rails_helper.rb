@@ -97,11 +97,3 @@ RSpec::Sidekiq.configure do |config|
   # Warn when jobs are not enqueued to Redis but to a job array
   config.warn_when_jobs_not_processed_by_sidekiq = true # default => true
 end
-
-VCR.configure do |config|
-  config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
-  config.hook_into :webmock
-  config.filter_sensitive_data('<openweather_key>') { ENV['openweather_key'] }
-  config.default_cassette_options = { re_record_interval: 30.days }
-  config.configure_rspec_metadata!
-end
