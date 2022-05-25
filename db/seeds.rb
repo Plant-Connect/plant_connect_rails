@@ -53,7 +53,7 @@ listing11 = Listing.create(quantity: 1, category: 'plant', rooted: true, user_id
 listing12 = Listing.create(quantity: 2, category: 'clippings', rooted: true, user_id: user9.id, plant_id: plant12.id, description: "Great for your sunburns.", active: true)
 listing13 = Listing.create(quantity: 1, category: 'clippings', rooted: true, user_id: user9.id, plant_id: plant13.id, description: "I'm running out of friends to give these clippings to. Will you be my new plant friend?", active: true)
 listing14 = Listing.create(quantity: 1, category: 'plant', rooted: true, user_id: user10.id, plant_id: plant14.id, description: "Free monstera plant. What else do you really need to know?", active: true)
-listing15 = Listing.create(quantity: 1, category: 'plant', rooted: true, user_id: user.10id, plant_id: plant15.id, description: "I named this Planty McPlantface, but it doesn't respond when called. Free to a GREAT home.", active: true)
+listing15 = Listing.create(quantity: 1, category: 'plant', rooted: true, user_id: user10.id, plant_id: plant15.id, description: "I named this Planty McPlantface, but it doesn't respond when called. Free to a GREAT home.", active: true)
 
 conversation1 = Conversation.create()
 conversation2 = Conversation.create()
