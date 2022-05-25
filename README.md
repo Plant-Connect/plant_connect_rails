@@ -29,7 +29,7 @@
 ## About The Project
 
 - **_Project description needed_**
-- [Front End Repo](https://github.com/Plant-Connect/plant-connect-FE)
+- [Front End Repository](https://github.com/Plant-Connect/plant-connect-FE)
 - [Heroku - Back End](https://plant-connect-be.herokuapp.com/)
 - **_FE deployment link needed_**
 
