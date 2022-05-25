@@ -362,7 +362,7 @@
 - **Get single conversation for a User**: 
   - `GET /api/v1/conversations/<conversation_id>`
   - Info:
-    - what notes do we want to include? 
+    - Returns all messages for a single conversation. 
   - Example Request
      ```
       GET /api/v1/conversations/3?user_id=1
