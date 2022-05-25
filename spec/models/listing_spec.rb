@@ -14,6 +14,7 @@ RSpec.describe Listing, type: :model do
   describe 'relationships' do
     it { should belong_to :user }
     it { should belong_to :plant }
+    it { should have_many :conversations }
   end
 
   describe 'enumerable' do
