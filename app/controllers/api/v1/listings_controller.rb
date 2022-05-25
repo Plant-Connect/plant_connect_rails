@@ -17,22 +17,17 @@ class Api::V1::ListingsController < ApplicationController
       user = User.find_by_id(params[:user_id])
       plant = user.plants.create(plant_params)
       if plant.save
-        if plant.image.attached?
-          plant.update(photo: url_for(plant.image))
-          listing = plant.listings.create(listing_params)
-        else
-          listing = plant.listings.create(listing_params)
-        end
+        listing = plant.listings.create(listing_params)
         if listing.save
           listing.send_new_listing_email
           json_response(ListingSerializer.show_listing(listing), :created)
         else
           json_response(ListingSerializer.listing_not_created, :bad_request)
         end
-      else 
+      else
         json_response(ListingSerializer.listing_not_created, :bad_request)
       end
-    end 
+    end
   end
 
   def update
@@ -56,6 +51,6 @@ class Api::V1::ListingsController < ApplicationController
       end
 
       def plant_params
-        params.permit(:photo, :plant_type, :indoor, :image)
+        params.permit(:photo, :plant_type, :indoor)
       end
 end
