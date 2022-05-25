@@ -4,7 +4,6 @@ RSpec.describe Conversation, type: :model do
 
   describe 'validations' do 
     it { should validate_presence_of :listing_id }
-    it { should validate_presence_of :name }
   end
 
   describe 'relationships' do

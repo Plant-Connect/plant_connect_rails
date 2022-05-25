@@ -1,7 +1,7 @@
 class Conversation < ApplicationRecord
-  before_validation :set_name 
+  before_save :set_name 
 
-  validates_presence_of :listing_id, :name
+  validates_presence_of :listing_id
 
   has_many :user_conversations
   has_many :users, through: :user_conversations
