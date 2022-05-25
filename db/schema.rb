@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_21_203033) do
+ActiveRecord::Schema.define(version: 2022_05_25_221426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,9 @@ ActiveRecord::Schema.define(version: 2022_05_21_203033) do
   create_table "conversations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "listing_id"
+    t.string "name"
+    t.index ["listing_id"], name: "index_conversations_on_listing_id"
   end
 
   create_table "listings", force: :cascade do |t|
@@ -94,6 +97,7 @@ ActiveRecord::Schema.define(version: 2022_05_21_203033) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "conversations", "listings"
   add_foreign_key "listings", "plants"
   add_foreign_key "listings", "users"
   add_foreign_key "messages", "users"

@@ -152,7 +152,7 @@ RSpec.describe 'Messages API', :type => :request do
                                               active: true
                                             )
 
-          @conversation = Conversation.create!
+          @conversation = Conversation.create!(listing_id: @listing.id)
         
           @request_body = {
                             "listing_id": @listing.id,
@@ -268,7 +268,7 @@ RSpec.describe 'Messages API', :type => :request do
                                               active: true
                                             )
 
-          @conversation = Conversation.create!
+          @conversation = Conversation.create!(listing_id: @listing.id)
         
           @request_body = {
                             "listing_id": @listing.id,
@@ -329,7 +329,7 @@ RSpec.describe 'Messages API', :type => :request do
                                               active: true
                                             )
 
-          @conversation = Conversation.create!
+          @conversation = Conversation.create!(listing_id: @listing.id)
         
           @request_body = {
                             "user_id": @user2.id,
@@ -391,7 +391,7 @@ RSpec.describe 'Messages API', :type => :request do
                                               active: true
                                             )
 
-          @conversation = Conversation.create!
+          @conversation = Conversation.create!(listing_id: @listing.id)
         
           @request_body = {
                             "listing_id": @listing.id,
@@ -449,7 +449,7 @@ RSpec.describe 'Messages API', :type => :request do
                                               active: true
                                             )
 
-          @conversation = Conversation.create!
+          @conversation = Conversation.create!(listing_id: @listing.id)
         
           @request_body = {
                             "listing_id": @listing.id,

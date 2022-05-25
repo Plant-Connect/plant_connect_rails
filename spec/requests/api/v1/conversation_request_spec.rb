@@ -41,8 +41,8 @@ RSpec.describe 'Conversations API', :type => :request do
                                             rooted: true, 
                                             active: true
                                           )
-        @conversation1 = Conversation.create!()
-        @conversation2 = Conversation.create!()
+        @conversation1 = Conversation.create!(listing_id: @listing.id)
+        @conversation2 = Conversation.create!(listing_id: @listing.id)
 
         @user1convo1 = UserConversation.create(user_id: @user1.id, conversation_id: @conversation1.id)
         @user1convo2 = UserConversation.create(user_id: @user1.id, conversation_id: @conversation2.id)
@@ -61,7 +61,7 @@ RSpec.describe 'Conversations API', :type => :request do
         expect(response).to be_successful
         expect(response).to have_http_status(200)
       end
-
+      
       it 'returns a json of expected data' do 
         data = JSON.parse(response.body, symbolize_names: true)[:data]
         
@@ -86,7 +86,7 @@ RSpec.describe 'Conversations API', :type => :request do
         data = JSON.parse(response.body, symbolize_names: true)[:data]
         
         data.each do |convo|
-          expect(convo[:attributes].keys).to eq([:messages])
+          expect(convo[:attributes].keys).to eq([:name, :messages])
 
           convo[:attributes][:messages].each do |message|
             expect(message.keys).to eq([:id, :content, :user_id, :created_at, :updated_at, :conversation_id])
@@ -105,6 +105,7 @@ RSpec.describe 'Conversations API', :type => :request do
           expect(data[:id]).to be_a String
           expect(data[:type]).to eq("conversation")
           expect(data[:attributes]).to be_a Hash
+          expect(data[:attributes][:name]).to be_a String
           expect(data[:attributes][:messages]).to be_an Array
 
           data[:attributes][:messages].each do |message| 
@@ -156,8 +157,8 @@ RSpec.describe 'Conversations API', :type => :request do
                                             rooted: true, 
                                             active: true
                                           )
-        @conversation1 = Conversation.create!()
-        @conversation2 = Conversation.create!()
+        @conversation1 = Conversation.create!(listing_id: @listing.id)
+        @conversation2 = Conversation.create!(listing_id: @listing.id)
 
         @user1convo1 = UserConversation.create(user_id: @user1.id, conversation_id: @conversation1.id)
         @user1convo2 = UserConversation.create(user_id: @user1.id, conversation_id: @conversation2.id)
@@ -217,7 +218,7 @@ RSpec.describe 'Conversations API', :type => :request do
                                             rooted: true, 
                                             active: true
                                           )
-        @conversation1 = Conversation.create!()
+        @conversation1 = Conversation.create!(listing_id: @listing.id)
 
         @user1convo1 = UserConversation.create(user_id: @user1.id, conversation_id: @conversation1.id)
         @user2convo1 = UserConversation.create(user_id: @user2.id, conversation_id: @conversation1.id)
@@ -244,7 +245,7 @@ RSpec.describe 'Conversations API', :type => :request do
       it 'attributes match expected JSON contract' do 
         data = JSON.parse(response.body, symbolize_names: true)[:data]
         
-        expect(data[:attributes].keys).to eq([:messages])
+        expect(data[:attributes].keys).to eq([:name, :messages])
         expect(data[:attributes][:messages]).to be_an Array
 
         data[:attributes][:messages].each do |message|
@@ -264,6 +265,8 @@ RSpec.describe 'Conversations API', :type => :request do
         expect(json[:data][:type]).to eq('conversation')
 
         expect(json[:data][:attributes]).to be_a Hash
+
+        expect(json[:data][:attributes][:name]).to be_a String
         expect(json[:data][:attributes][:messages]).to be_an Array
 
         json[:data][:attributes][:messages].each do |message|
@@ -306,7 +309,7 @@ RSpec.describe 'Conversations API', :type => :request do
                                             rooted: true, 
                                             active: true
                                           )
-        @conversation1 = Conversation.create!()
+        @conversation1 = Conversation.create!(listing_id: @listing.id)
 
         @user1convo1 = UserConversation.create(user_id: @user1.id, conversation_id: @conversation1.id)
         @user2convo1 = UserConversation.create(user_id: @user2.id, conversation_id: @conversation1.id)
@@ -361,7 +364,7 @@ RSpec.describe 'Conversations API', :type => :request do
                                             rooted: true, 
                                             active: true
                                           )
-        @conversation1 = Conversation.create!()
+        @conversation1 = Conversation.create!(listing_id: @listing.id)
 
         @user1convo1 = UserConversation.create(user_id: @user1.id, conversation_id: @conversation1.id)
         @user2convo1 = UserConversation.create(user_id: @user2.id, conversation_id: @conversation1.id)
