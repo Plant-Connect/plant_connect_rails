@@ -41,8 +41,8 @@ RSpec.describe 'Conversations API', :type => :request do
                                             rooted: true, 
                                             active: true
                                           )
-        @conversation1 = Conversation.create!()
-        @conversation2 = Conversation.create!()
+        @conversation1 = Conversation.create!(listing_id: @listing.id)
+        @conversation2 = Conversation.create!(listing_id: @listing.id)
 
         @user1convo1 = UserConversation.create(user_id: @user1.id, conversation_id: @conversation1.id)
         @user1convo2 = UserConversation.create(user_id: @user1.id, conversation_id: @conversation2.id)
@@ -156,8 +156,8 @@ RSpec.describe 'Conversations API', :type => :request do
                                             rooted: true, 
                                             active: true
                                           )
-        @conversation1 = Conversation.create!()
-        @conversation2 = Conversation.create!()
+        @conversation1 = Conversation.create!(listing_id: @listing.id)
+        @conversation2 = Conversation.create!(listing_id: @listing.id)
 
         @user1convo1 = UserConversation.create(user_id: @user1.id, conversation_id: @conversation1.id)
         @user1convo2 = UserConversation.create(user_id: @user1.id, conversation_id: @conversation2.id)
@@ -217,7 +217,7 @@ RSpec.describe 'Conversations API', :type => :request do
                                             rooted: true, 
                                             active: true
                                           )
-        @conversation1 = Conversation.create!()
+        @conversation1 = Conversation.create!(listing_id: @listing.id)
 
         @user1convo1 = UserConversation.create(user_id: @user1.id, conversation_id: @conversation1.id)
         @user2convo1 = UserConversation.create(user_id: @user2.id, conversation_id: @conversation1.id)
@@ -306,7 +306,7 @@ RSpec.describe 'Conversations API', :type => :request do
                                             rooted: true, 
                                             active: true
                                           )
-        @conversation1 = Conversation.create!()
+        @conversation1 = Conversation.create!(listing_id: @listing.id)
 
         @user1convo1 = UserConversation.create(user_id: @user1.id, conversation_id: @conversation1.id)
         @user2convo1 = UserConversation.create(user_id: @user2.id, conversation_id: @conversation1.id)
@@ -361,7 +361,7 @@ RSpec.describe 'Conversations API', :type => :request do
                                             rooted: true, 
                                             active: true
                                           )
-        @conversation1 = Conversation.create!()
+        @conversation1 = Conversation.create!(listing_id: @listing.id)
 
         @user1convo1 = UserConversation.create(user_id: @user1.id, conversation_id: @conversation1.id)
         @user2convo1 = UserConversation.create(user_id: @user2.id, conversation_id: @conversation1.id)
