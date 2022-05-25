@@ -15,6 +15,7 @@
       </ul>
     </li>
     <li><a href="#built-with">Built With</a></li>
+    <li><a href="#sidekiq-mailer">Sidekiq Mailer</a></li>
     <li>
       <a href="#testing">Testing</a>
       <ul>
@@ -414,6 +415,12 @@
   - WebSockets 
   - Postman
   - RSpec 
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Sidekiq Mailer:
+
+- **_include screen shot of emample mailer_**
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
