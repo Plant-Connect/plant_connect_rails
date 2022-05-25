@@ -9,9 +9,26 @@
     <li><a href="#about-the-project">About The Project</a></li>
     <li><a href="#getting-started">Getting Started</a></li>
     <li>
-      <a href="#api-info">API Info</a>
+      <a href="#api-exposed-endpoints">API Exposed Endpoints</a>
       <ul>
-        <li><a href="#exposed">Exposed</a></li>
+        <li>
+          <a href="#get-all-listings">Get all listings</a>
+        </li>
+        <li>
+          <a href="#create-new-listing">Create new listing</a>
+        </li>
+        <li>
+          <a href="#update-current-listing">Update current listing</a>
+        </li>
+        <li>
+          <a href="#create-new-message">Create new message</a>
+        </li>
+        <li>
+          <a href="#get-all-conversations-for-a-single-user">Get all conversations for a single User</a>
+        </li>
+        <li>
+          <a href="#get-single-conversation-for-a-user">Get single conversation for a User</a>
+        </li>
       </ul>
     </li>
     <li><a href="#built-with">Built With</a></li>
@@ -58,10 +75,9 @@
     
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## API Info:
-  ### Exposed:
+## API Exposed Endpoints:
   
-- **Get all listings**: 
+- ### Get all listings: 
   - `GET /api/v1/listings`
   - Info:
     - Returns all listings, except listings posted by the currently logged-in user
@@ -159,7 +175,7 @@
         }
     ```
     
-- **Create new listing**: 
+- ### Create new listing: 
   - `POST /api/v1/listings`
   - Info:
     - Creates a new Plant object and creates a Listing for that Plant.
@@ -204,7 +220,7 @@
       }
     ```
        
-- **Update current listing**: 
+- ### Update current listing: 
   - `PATCH /api/v1/listings`
   - Info:
     - Returns newly updated listing information. 
@@ -242,7 +258,7 @@
       }
     ```
        
-- **Create new message**: 
+- ### Create new message: 
   - `POST /api/v1/messages`
   - Info:
     - Creates a new conversation if conversation_id is not provided in POST request. If POST includes conversation_id, new message will be added to existing conversation. 
@@ -301,7 +317,7 @@
       }
       ```
       
-- **Get all conversations for a single User**: 
+- ### Get all conversations for a single User: 
   - `GET /api/v1/conversations`
   - Info:
     - Returns all conversation for the user given. The return will also include all messages for each conversation within a nested hash. 
@@ -362,7 +378,7 @@
  
     ```
        
-- **Get single conversation for a User**: 
+- ### Get single conversation for a User: 
   - `GET /api/v1/conversations/<conversation_id>`
   - Info:
     - Returns all messages for a single conversation. 
