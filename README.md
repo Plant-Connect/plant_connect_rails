@@ -303,7 +303,7 @@
 - **Get all conversations for a single User**: 
   - `GET /api/v1/conversations`
   - Info:
-    - what notes do we want to include? 
+    - Returns all conversation for the user given. The return will also include all messages for each conversation within a nested hash. 
   - Example Request
      ```
       GET /api/v1/conversations?user_id=1
@@ -311,6 +311,51 @@
   - Example Response
     ```
     Status Code: 200
+    
+    {
+      "data": [
+          {
+              "id": "2",
+              "type": "conversation",
+              "attributes": {
+                  "messages": [
+                      {
+                          "id": 1,
+                          "content": "I'm very interested in your snake plant.",
+                          "user_id": 1,
+                          "created_at": "2022-05-23T19:29:17.559Z",
+                          "updated_at": "2022-05-23T19:29:17.559Z",
+                          "conversation_id": 2
+                      }
+                  ]
+              }
+          },
+          {
+              "id": "3",
+              "type": "conversation",
+              "attributes": {
+                  "messages": [
+                      {
+                          "id": 2,
+                          "content": "That's a really nice plant. Can I have it?",
+                          "user_id": 2,
+                          "created_at": "2022-05-25T00:16:09.027Z",
+                          "updated_at": "2022-05-25T00:16:09.027Z",
+                          "conversation_id": 3
+                      },
+                      {
+                          "id": 3,
+                          "content": "Of course you can have it. You'll love Planty!",
+                          "user_id": 1,
+                          "created_at": "2022-05-25T00:22:20.782Z",
+                          "updated_at": "2022-05-25T00:22:20.782Z",
+                          "conversation_id": 3
+                      }
+                  ]
+              }
+          }
+      ]
+    }
  
     ```
        
@@ -320,17 +365,39 @@
     - what notes do we want to include? 
   - Example Request
      ```
-      GET /api/v1/conversations?conversation_id=1
+      GET /api/v1/conversations/3?user_id=1
      ```
   - Example Response
     ```
     Status Code: 200
-     
-    ```
     
-    
-    <p align="right">(<a href="#top">back to top</a>)</p>
-   
+    {
+      "data": {
+          "id": "3",
+          "type": "conversation",
+          "attributes": {
+              "messages": [
+                  {
+                      "id": 2,
+                      "content": "That's a really nice plant. Can I have it?",
+                      "user_id": 2,
+                      "created_at": "2022-05-25T00:16:09.027Z",
+                      "updated_at": "2022-05-25T00:16:09.027Z",
+                      "conversation_id": 3
+                  },
+                  {
+                      "id": 3,
+                      "content": "Of course you can have it. You'll love Planty!",
+                      "user_id": 1,
+                      "created_at": "2022-05-25T00:22:20.782Z",
+                      "updated_at": "2022-05-25T00:22:20.782Z",
+                      "conversation_id": 3
+                  }
+              ]
+          }
+      }
+    }
+    ```   
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
