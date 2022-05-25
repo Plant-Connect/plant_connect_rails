@@ -1,4 +1,4 @@
 class ConversationSerializer
   include JSONAPI::Serializer
-  attributes :messages
+  attributes :name, :messages
 end

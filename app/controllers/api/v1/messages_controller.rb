@@ -10,7 +10,7 @@ class Api::V1::MessagesController < ApplicationController
       json_response({ data: { message: 'missing message content' } }, :bad_request)
     else
       if params[:message][:conversation_id].blank? 
-        conversation = Conversation.create!()
+        conversation = Conversation.create!(listing_id: params[:listing_id])
         message = Message.create!(content: params[:message][:content], user_id: params[:message][:user_id], conversation_id: conversation.id)
       else 
         conversation = Conversation.find_by_id(params[:message][:conversation_id])

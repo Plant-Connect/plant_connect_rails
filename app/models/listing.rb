@@ -15,6 +15,7 @@ class Listing < ApplicationRecord
   # Model Relationships
   belongs_to :user
   belongs_to :plant
+  has_many :conversations
 
   enum category: [:seeds, :clippings, :plant]
 

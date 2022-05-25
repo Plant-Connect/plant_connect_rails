@@ -319,6 +319,7 @@
               "id": "2",
               "type": "conversation",
               "attributes": {
+                  "name": "snake plant",
                   "messages": [
                       {
                           "id": 1,
@@ -335,6 +336,7 @@
               "id": "3",
               "type": "conversation",
               "attributes": {
+                  "name": "snake plant",
                   "messages": [
                       {
                           "id": 2,
@@ -377,6 +379,7 @@
           "id": "3",
           "type": "conversation",
           "attributes": {
+              "name": "snake plant",
               "messages": [
                   {
                       "id": 2,
