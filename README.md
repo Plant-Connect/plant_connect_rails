@@ -1,6 +1,6 @@
 <div id="top"></div>
 
-# Plant Connect
+# Planty Swapper
 
 <!-- TABLE OF CONTENTS -->
 <details>
