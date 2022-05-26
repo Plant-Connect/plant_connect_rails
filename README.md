@@ -50,7 +50,6 @@
 
 - [Front End Repository](https://github.com/Plant-Connect/plant-connect-FE)
 - [Heroku - Back End](https://plant-connect-be.herokuapp.com/)
-- **_FE deployment link needed_**
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
