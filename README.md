@@ -31,6 +31,7 @@
         </li>
       </ul>
     </li>
+    <li><a href="#project-demo">Project Demo</a></li>
     <li><a href="#built-with">Built With</a></li>
     <li><a href="#sidekiq-mailer">Sidekiq Mailer</a></li>
     <li>
@@ -418,6 +419,25 @@
       }
     }
     ```   
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Project Demos:
+
+- As a user, when you open up the application you will be presentedd with three carousels of choices, `plants`, `seeds`, and `clippings`, and be able to see the offerings in your area.
+  - ![carousel](https://user-images.githubusercontent.com/92649050/170574731-d423230a-d1c4-49be-adea-22510a3afca4.gif)
+
+- When you are interested in one of the listings you can click `learn more` on that listing to be transported to a single listing modal view to receive more detailed information and contact the listing user via our message portal. 
+  - ![sendMessage](https://user-images.githubusercontent.com/92649050/170574803-81336d94-0562-4e2f-9423-ee49ea616433.gif)
+
+- You have the option to post your own plant, seed, or clipping that you can offer to the community by clicking `post your plants`, filling out all required fields, taking a picture of your item, then submitting that item to create your own listing.
+  - ![post](https://user-images.githubusercontent.com/92649050/170574904-c10fe672-073a-48ef-b70e-016eab5d152e.gif)
+
+- You can click on the `messaging` icon, on the bottom left, to see all of your active conversations then click on any conversation to review or continue said conversation.
+  - ![allMessages](https://user-images.githubusercontent.com/92649050/170576492-3c9f7cae-4368-4642-becf-1e4ef97e4617.gif)
+
+- You can click on the `plant` icon, on the bottom right, to learn more about the Planty Swapper application, as well as resources for planting, propagating, and shipping your plants.
+  - ![about](https://user-images.githubusercontent.com/92649050/170574986-c9e6540f-abc6-4f09-ac1b-0de617c607bf.gif)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
