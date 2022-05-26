@@ -46,7 +46,8 @@
 
 ## About The Project
 
-- **_Project description needed_**
+- Planty Swapper is a fun and useful mobile service that connects plant lovers to help them trade seeds, propogated clippings and fully grown plants with other plant lovers near and far to expand thir collection and to keep heirloom plant varietals from endangerment and extinction.
+
 - [Front End Repository](https://github.com/Plant-Connect/plant-connect-FE)
 - [Heroku - Back End](https://plant-connect-be.herokuapp.com/)
 - **_FE deployment link needed_**
@@ -439,7 +440,9 @@
 
 ## Sidekiq Mailer:
 
-- **_include screen shot of emample mailer_**
+- Sidekiq is being utilized to send a mailer asyncronously when a listing is created. The email is sent to all Users that are in the same location as the User who posted the listing. 
+- Example Email: 
+- <img src="https://user-images.githubusercontent.com/91357724/170389357-5eec3faf-3b60-4e7c-bbd9-43f7ba710c5b.PNG" alt="Example Sidekiq Email" width="500" height="100%">
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -453,7 +456,7 @@
   
   ### RSpec Test Results
   
-  **_put test screen shots here_**
+  ![RSpec Test Results](https://user-images.githubusercontent.com/91357724/170389108-4ad3ea65-06d8-44d7-a539-3c54b393f081.png)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
